@@ -1,0 +1,184 @@
+import 'package:flutter/material.dart';
+
+class EventStep {
+  final String time;
+  final String title;
+  final String description;
+
+  EventStep({
+    required this.time,
+    required this.title,
+    required this.description,
+  });
+}
+
+class WeddingProgramStepper extends StatelessWidget {
+  const WeddingProgramStepper({super.key});
+
+  Widget _timelineItem({required String time, required String title}) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(child: Icon(Icons.home, size: 20, color: Colors.red)),
+          const VerticalDivider(width: 20, thickness: 2, color: Colors.grey),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(time, style: const TextStyle(fontSize: 13)),
+                const SizedBox(height: 4),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        const Text(
+          "កម្មវិធីថ្ងៃទីមួយ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 20),
+
+        /// Row 1
+        Row(
+          children: [
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០២:០០ រសៀល',
+                title: 'ពិធីសែនក្រុងពាលី',
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៣:០០ រសៀល',
+                title: 'ពិធីសូត្រមន្តចម្រើនព្រះបរិត្ត',
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: 16),
+
+        /// Row 2
+        Row(
+          children: [
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៤:០០ រសៀល',
+                title: 'ពិធីជុំពេលា និងជាវខាន់ស្លា',
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៥:០០ រសៀល',
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលល្ងាច',
+              ),
+            ),
+          ],
+        ),
+
+        const Text(
+          "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 20),
+
+        /// Row 3
+        Row(
+          children: [
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៦:៣០ ព្រឹក',
+                title: 'ជួបជុំភ្ញៀវកិត្តិយសដើម្បីរៀបចំហែជំនួន',
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៧:០០ ព្រឹក',
+                title: 'ពិធីហែជំនួនកំណត់ចូលរោងជ័យ',
+              ),
+            ),
+          ],
+        ),
+
+        /// Row 4
+        Row(
+          children: [
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៧:៣០ ព្រឹក',
+                title: 'ពិធីចៅមហានិយាយជើងការ សែនព្រេង រៀបរាប់ផ្លែឈើ',
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៨:០០ ព្រឹក',
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលព្រឹក',
+              ),
+            ),
+          ],
+        ),
+
+        /// Row 5
+        Row(
+          children: [
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៩:០០ ព្រឹក',
+                title: 'ពិធីកាត់សក់បង្កក់សិរី កូនប្រុស និងកូនស្រី',
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ១១:០០ ព្រឹក',
+                title: 'ពិធីសំពះផ្ទឹបចង់ដៃ បង្វិលពពិល និងព្រះថោងតោងស្បៃ',
+              ),
+            ),
+          ],
+        ),
+
+        /// Row 6
+        Row(
+          children: [
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ១២:០០ ព្រឹក',
+                title:
+                    'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលថ្ងៃត្រង់ បញ្ចប់កិច្ចអាពាហ៍ពិពាហ៍',
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៥:០០ ល្ងាច',
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាភោជនាហារ',
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
