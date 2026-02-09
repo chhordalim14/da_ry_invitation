@@ -1,7 +1,4 @@
 import 'dart:ui';
-import 'package:da_ry_invitation/page/event_list.dart';
-import 'package:easy_stepper/easy_stepper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:video_player/video_player.dart';
@@ -16,7 +13,6 @@ class WeddingPage extends StatefulWidget {
 
 class _WeddingPageState extends State<WeddingPage> {
   late VideoPlayerController _controller;
-  bool _pausedAtMark = false; // Pause at 10.08s
   bool _showDetail = false; // Toggle UI
 
   @override
@@ -24,55 +20,14 @@ class _WeddingPageState extends State<WeddingPage> {
     super.initState();
 
     // Initialize video controller
-    _controller = VideoPlayerController.asset('assets/wedding_bg.mp4')
+    _controller = VideoPlayerController.asset('assets/gif_background.MOV')
       ..initialize().then((_) {
         setState(() {});
         _controller
           ..setVolume(0)
-          // ..setLooping(true)
+          ..setLooping(true)
           ..play();
       });
-
-    // Listen to video position
-    _controller.addListener(_videoListener);
-  }
-
-  bool _mainContentVisible = false; // controls fade-in
-
-  void _videoListener() {
-    if (!_controller.value.isInitialized) return;
-    final pos = _controller.value.position;
-
-    if (!_pausedAtMark && pos >= const Duration(milliseconds: 10080)) {
-      // Delay before showing main content and pausing
-      Future.delayed(const Duration(milliseconds: 400), () {
-        if (mounted) {
-          _controller.pause(); // pause video
-          setState(() {
-            _mainContentVisible = true; // fade in main content
-            _showDetail = false; // ensure main content is shown
-          });
-          _pausedAtMark = true;
-        }
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.removeListener(_videoListener);
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onButtonTap() {
-    if (_pausedAtMark) {
-      _controller.play(); // resume video
-    }
-
-    setState(() {
-      _showDetail = true; // switch UI
-    });
   }
 
   int activeStep = 0;
@@ -105,11 +60,7 @@ class _WeddingPageState extends State<WeddingPage> {
               duration: const Duration(milliseconds: 500),
               child: _showDetail
                   ? _buildDetailContent(context)
-                  : AnimatedOpacity(
-                      opacity: _mainContentVisible ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 400),
-                      child: _buildMainContent(context),
-                    ),
+                  : _buildMainContent(context),
             ),
           ),
         ],
@@ -196,7 +147,11 @@ class _WeddingPageState extends State<WeddingPage> {
 
                   /// Liquid Glass Button
                   GestureDetector(
-                    onTap: _onButtonTap,
+                    onTap: () {
+                      setState(() {
+                        _showDetail = true;
+                      });
+                    },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: BackdropFilter(
@@ -396,12 +351,11 @@ class _WeddingPageState extends State<WeddingPage> {
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
-                    ), WeddingProgramStepper(),
+                    ),
                   ],
                 ),
               ],
             ),
-           
           ],
         ),
       ),
