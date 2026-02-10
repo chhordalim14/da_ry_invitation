@@ -32,20 +32,24 @@ class WeddingProgramStepper extends StatelessWidget {
               child: Image.asset(icon, fit: BoxFit.contain),
             ),
           ),
-          const AnimatedSoftSCurveLine(width: 20, color: Colors.grey),
+          const AnimatedSoftSCurveLine(width: 20, color: Colors.blueGrey),
 
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(time, style: const TextStyle(fontSize: 13)),
+                Text(
+                  time,
+                  style: const TextStyle(fontSize: 13, color: Colors.blueGrey),
+                ),
                 const SizedBox(height: 4),
                 Text(
                   title,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
+                    color: Colors.blueGrey,
                   ),
                 ),
               ],
@@ -59,12 +63,23 @@ class WeddingProgramStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 16),
-        const Text(
+        Text(
           "កម្មវិធីថ្ងៃទីមួយ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.amber[700],
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 20),
 
@@ -112,9 +127,21 @@ class WeddingProgramStepper extends StatelessWidget {
           ],
         ),
 
-        const Text(
+        Text(
           "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.amber[700],
+
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 20),
 

@@ -7,12 +7,21 @@ class DateDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
+        Text(
           'MARCH',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             letterSpacing: 2,
+            color: Colors.amber[700],
+
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
           ),
         ),
 
@@ -40,15 +49,57 @@ class DateDivider extends StatelessWidget {
               // CENTER TEXT (VERTICALLY CENTERED)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('ON SUNDAY', style: TextStyle(fontSize: 12)),
+                children: [
+                  Text(
+                    'ON SUNDAY',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.amber[700],
+                      // fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          color: Color.fromARGB(255, 213, 164, 39),
+                          offset: Offset(4, 4),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(width: 12),
                   Text(
                     '08',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber[700],
+
+                      shadows: [
+                        Shadow(
+                          color: Color.fromARGB(255, 213, 164, 39),
+                          offset: Offset(4, 4),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(width: 12),
-                  Text('05:00PM', style: TextStyle(fontSize: 12)),
+                  Text(
+                    '05:00PM',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.amber[700],
+                      // fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          color: Color.fromARGB(255, 213, 164, 39),
+                          offset: Offset(4, 4),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
 
@@ -71,12 +122,21 @@ class DateDivider extends StatelessWidget {
 
         const SizedBox(height: 16),
 
-        const Text(
+        Text(
           '2026',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             letterSpacing: 2,
+            color: Colors.amber[700],
+
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
           ),
         ),
       ],

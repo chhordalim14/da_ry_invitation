@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:video_player/video_player.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WeddingPage extends StatefulWidget {
   const WeddingPage({super.key});
@@ -44,7 +45,7 @@ class _WeddingPageState extends State<WeddingPage> {
           /// Video background
           if (_controller.value.isInitialized)
             ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+              imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: SizedBox(
@@ -89,22 +90,22 @@ class _WeddingPageState extends State<WeddingPage> {
       ],
     ).value;
 
-    final containerHeight = ResponsiveValue<double>(
-      context,
-      defaultValue: MediaQuery.of(context).size.height * 0.7,
-      conditionalValues: [
-        Condition.largerThan(
-          breakpoint: 600,
-          value: MediaQuery.of(context).size.height * 0.6,
-        ),
-      ],
-    ).value;
+    // final containerHeight = ResponsiveValue<double>(
+    //   context,
+    //   defaultValue: MediaQuery.of(context).size.height * 0.6,
+    //   conditionalValues: [
+    //     Condition.largerThan(
+    //       breakpoint: 600,
+    //       value: MediaQuery.of(context).size.height * 0.5,
+    //     ),
+    //   ],
+    // ).value;
 
-    final verticalSpacing = ResponsiveValue<double>(
-      context,
-      defaultValue: 24.0,
-      conditionalValues: [Condition.largerThan(name: TABLET, value: 32.0)],
-    ).value;
+    // final verticalSpacing = ResponsiveValue<double>(
+    //   context,
+    //   defaultValue: 24.0,
+    //   conditionalValues: [Condition.largerThan(name: TABLET, value: 32.0)],
+    // ).value;
 
     return Column(
       key: const ValueKey(1),
@@ -113,95 +114,106 @@ class _WeddingPageState extends State<WeddingPage> {
         // Frosted Glass Container
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              height: containerHeight,
-              width: containerWidth,
-              padding: EdgeInsets.all(verticalSpacing),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(
-                  alpha: 0.1,
-                ), // semi-transparent white
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.8),
-                  width: 1.5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'សិរីមង្គលអាពាហ៏ពិពាហ៍',
+                style: AppStyles.heading2(context).copyWith(
+                  color: Color.fromARGB(255, 208, 154, 16),
+                  // fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(
+                        255,
+                        161,
+                        118,
+                        10,
+                      ).withValues(alpha: 0.2),
+                      offset: Offset(3, 3),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+                // textAlign: TextAlign.center,
+              ),
+              Text(
+                'ឆដា & ធារី',
+                style: AppStyles.heading1(context).copyWith(
+                  color: Color.fromARGB(255, 208, 154, 16),
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(
+                        255,
+                        161,
+                        118,
+                        10,
+                      ).withValues(alpha: 0.2),
+                      offset: Offset(3, 3),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+                // textAlign: TextAlign.center,
+              ),
+              Text(
+                'សូមគោរពអញ្ជើញ',
+                style: AppStyles.bodyText(
+                  context,
+                ).copyWith(color: Colors.blueGrey),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                width: containerWidth * 0.8,
+                height: containerWidth * 0.2,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset('assets/name_box.png', fit: BoxFit.fill),
+                    Text("Lim Chhorda", style: AppStyles.bodyText(context)),
+                  ],
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SelectableText(
-                    'សិរីមង្គលអាពាហ៏ពិពាហ៍',
-                    style: AppStyles.heading2(context),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'ឆដា & ធារី',
-                    style: AppStyles.heading1(context),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'សូមគោរពអញ្ជើញ',
-                    style: AppStyles.bodyText(context),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    width: containerWidth * 0.8,
-                    height: containerWidth * 0.2,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset('assets/name_box.png', fit: BoxFit.fill),
-                        Text("Lim Chhorda", style: AppStyles.bodyText(context)),
-                      ],
-                    ),
-                  ),
 
-                  /// Liquid Glass Button
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _showDetail = true;
-                      });
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          width: 180,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.18),
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.4),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                FontAwesomeIcons.envelopeOpen,
-                                size: 16,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                'បើកធៀប',
-                                style: AppStyles.buttonText(context),
-                              ),
-                            ],
-                          ),
+              /// Liquid Glass Button
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _showDetail = true;
+                  });
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      width: 180,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.18),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.4),
                         ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            FontAwesomeIcons.envelopeOpen,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(width: 10),
+                          Text('បើកធៀប', style: AppStyles.buttonText(context)),
+                        ],
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ],
@@ -213,13 +225,35 @@ class _WeddingPageState extends State<WeddingPage> {
   Widget _buildInvitationHeader() {
     return Text(
       'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
-      style: AppStyles.heading1(context),
+      style: AppStyles.heading1(context).copyWith(
+        color: Colors.amber[700],
+        // fontSize: 18,
+        fontWeight: FontWeight.bold,
+        shadows: [
+          Shadow(
+            color: Color.fromARGB(255, 213, 164, 39),
+            offset: Offset(4, 4),
+            blurRadius: 2,
+          ),
+        ],
+      ),
       textAlign: TextAlign.center,
     );
   }
 
   Widget _buildParentsSection() {
-    final textStyle = AppStyles.bodyText(context);
+    final textStyle = AppStyles.bodyText(context).copyWith(
+      color: Colors.amber[700],
+      // fontSize: 18,
+      fontWeight: FontWeight.bold,
+      shadows: [
+        Shadow(
+          color: Color.fromARGB(255, 213, 164, 39),
+          offset: Offset(4, 4),
+          blurRadius: 2,
+        ),
+      ],
+    );
     return ResponsiveRowColumn(
       layout: ResponsiveValue<ResponsiveRowColumnType>(
         context,
@@ -265,13 +299,24 @@ class _WeddingPageState extends State<WeddingPage> {
       children: [
         Text(
           'មានកិត្តិយសសូមគោរពអញ្ជើញ',
-          style: AppStyles.bodyText(context),
+          style: AppStyles.bodyText(context).copyWith(
+            color: Colors.amber[700],
+            // fontSize: 18,
+            // fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         Text(
           'សម្តេចទ្រង់ ឯកឧត្តម លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា កញ៉ា លោកជំទាវ លោកលោកស្រី អ្នកនាង កញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធិពរជ័យសិរីសួស្តី ជ័យមង្គល ក្នុងពិធីអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រីរបស់យើងខ្ញុំ',
-          style: AppStyles.subtleText(context),
+          style: AppStyles.bodyText(context).copyWith(color: Colors.blueGrey),
           textAlign: TextAlign.center,
         ),
       ],
@@ -301,8 +346,36 @@ class _WeddingPageState extends State<WeddingPage> {
         ResponsiveRowColumnItem(
           child: Column(
             children: [
-              Text('កូនប្រុសនាម', style: AppStyles.bodyText(context)),
-              Text('លឺម ឆដា', style: AppStyles.heading2(context)),
+              Text(
+                'កូនប្រុសនាម',
+                style: AppStyles.bodyText(context).copyWith(
+                  color: Colors.amber[700],
+                  // fontSize: 18,
+                  // fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(255, 213, 164, 39),
+                      offset: Offset(4, 4),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                'លឺម ឆដា',
+                style: AppStyles.heading2(context).copyWith(
+                  color: Colors.amber[700],
+                  // fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(255, 213, 164, 39),
+                      offset: Offset(4, 4),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -319,8 +392,36 @@ class _WeddingPageState extends State<WeddingPage> {
         ResponsiveRowColumnItem(
           child: Column(
             children: [
-              Text('កូនស្រីនាម', style: AppStyles.bodyText(context)),
-              Text('យី សុធារី', style: AppStyles.heading2(context)),
+              Text(
+                'កូនស្រីនាម',
+                style: AppStyles.bodyText(context).copyWith(
+                  color: Colors.amber[700],
+                  // fontSize: 18,
+                  // fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(255, 213, 164, 39),
+                      offset: Offset(4, 4),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                'យី សុធារី',
+                style: AppStyles.heading2(context).copyWith(
+                  color: Colors.amber[700],
+                  // fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(255, 213, 164, 39),
+                      offset: Offset(4, 4),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -331,17 +432,42 @@ class _WeddingPageState extends State<WeddingPage> {
   Widget _buildEventTimeAndLocation() {
     return Text(
       'និងពិសាភោជនាហារដែលនឺងប្រព្រឹត្តទៅនៅ\nថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩ ត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច\nនៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
-      style: AppStyles.bodyText(context),
+      style: AppStyles.bodyText(context).copyWith(color: Colors.blueGrey),
       textAlign: TextAlign.center,
     );
   }
 
   Widget _buildEnglishInvitation() {
-    final parentsTextStyle = AppStyles.bodyText(context);
+    final parentsTextStyle = AppStyles.bodyText(context).copyWith(
+      color: Colors.amber[700],
+      // fontSize: 18,
+      fontWeight: FontWeight.bold,
+      shadows: [
+        Shadow(
+          color: Color.fromARGB(255, 213, 164, 39),
+          offset: Offset(4, 4),
+          blurRadius: 2,
+        ),
+      ],
+    );
 
     return Column(
       children: [
-        Text('Wedding Ceremony', style: AppStyles.heading1(context)),
+        Text(
+          'Wedding Ceremony',
+          style: AppStyles.heading1(context).copyWith(
+            color: Colors.amber[700],
+            // fontSize: 18,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
+          ),
+        ),
         const SizedBox(height: 24),
         ResponsiveRowColumn(
           layout: ResponsiveValue<ResponsiveRowColumnType>(
@@ -384,7 +510,7 @@ class _WeddingPageState extends State<WeddingPage> {
         const SizedBox(height: 24),
         Text(
           'Cordially request the honor of your presence on the auspicious occasion of the wedding of our children',
-          style: AppStyles.bodyText(context),
+          style: AppStyles.bodyText(context).copyWith(color: Colors.blueGrey),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 24),
@@ -404,13 +530,46 @@ class _WeddingPageState extends State<WeddingPage> {
           columnSpacing: 8,
           children: [
             ResponsiveRowColumnItem(
-              child: Text('Lim Chhorda', style: AppStyles.heading2(context)),
+              child: Text(
+                'Lim Chhorda',
+                style: AppStyles.heading2(context).copyWith(
+                  color: Colors.amber[700],
+                  // fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(255, 213, 164, 39),
+                      offset: Offset(4, 4),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+              ),
             ),
             ResponsiveRowColumnItem(
-              child: Text('&', style: AppStyles.heading2(context)),
+              child: Text(
+                '&',
+                style: AppStyles.heading2(
+                  context,
+                ).copyWith(color: Colors.amber[700]),
+              ),
             ),
             ResponsiveRowColumnItem(
-              child: Text('Yi Sotheary', style: AppStyles.heading2(context)),
+              child: Text(
+                'Yi Sotheary',
+                style: AppStyles.heading2(context).copyWith(
+                  color: Colors.amber[700],
+                  // fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Color.fromARGB(255, 213, 164, 39),
+                      offset: Offset(4, 4),
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
@@ -419,7 +578,7 @@ class _WeddingPageState extends State<WeddingPage> {
         const SizedBox(height: 32),
         Text(
           'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU!',
-          style: AppStyles.bodyText(context),
+          style: AppStyles.bodyText(context).copyWith(color: Colors.blueGrey),
           textAlign: TextAlign.center,
         ),
       ],
@@ -434,6 +593,38 @@ class _WeddingPageState extends State<WeddingPage> {
         ),
         const SizedBox(height: 32),
         WeddingProgramStepper(),
+      ],
+    );
+  }
+
+  Widget _buildLocationSection() {
+    return Column(
+      children: [
+        Text(
+          'ទីតាំងពិធីអាពាហ៍ពិពាហ៍',
+          style: AppStyles.heading2(context).copyWith(
+            color: Colors.amber[700],
+            // fontSize: 18,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Color.fromARGB(255, 213, 164, 39),
+                offset: Offset(4, 4),
+                blurRadius: 2,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Container(
+          height: 250,
+          width: 250,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.amber[700]!, width: 2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Image.asset('assets/qr_code.png', fit: BoxFit.contain),
+        ),
       ],
     );
   }
@@ -466,6 +657,7 @@ class _WeddingPageState extends State<WeddingPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: verticalSpacing * 3),
             _buildInvitationHeader(),
             SizedBox(height: verticalSpacing),
             _buildParentsSection(),
@@ -479,6 +671,69 @@ class _WeddingPageState extends State<WeddingPage> {
             _buildEnglishInvitation(),
             SizedBox(height: verticalSpacing * 2),
             _buildFooterSection(),
+            SizedBox(height: verticalSpacing * 2),
+            _buildLocationSection(),
+            SizedBox(height: verticalSpacing * 2),
+            GestureDetector(
+              onTap: () async {
+                final Uri url = Uri.parse(
+                  'https://maps.app.goo.gl/C5WmLrh2ZXjV9rNw6',
+                );
+                if (!await launchUrl(url)) {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    width: 180,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color: Colors.blueAccent.withValues(alpha: 0.4),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          FontAwesomeIcons.envelopeOpen,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          'ចុចមើលទីតាំង',
+                          style: AppStyles.buttonText(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: verticalSpacing * 2),
+            Text(
+              'វិចិត្រសាល',
+              style: AppStyles.heading2(context).copyWith(
+                color: Colors.amber[700],
+                // fontSize: 18,
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    color: Color.fromARGB(255, 213, 164, 39),
+                    offset: Offset(4, 4),
+                    blurRadius: 2,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: verticalSpacing * 3),
           ],
         ),
       ),
