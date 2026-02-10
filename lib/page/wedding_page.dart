@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:da_ry_invitation/page/count_down_date.dart';
+import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:video_player/video_player.dart';
@@ -352,6 +354,17 @@ class _WeddingPageState extends State<WeddingPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    CountdownTimer(
+                      targetDate: DateTime(
+                        2026,
+                        3,
+                        7,
+                        7,
+                        0,
+                      ), // adjust time if needed
+                    ),
+
+                    WeddingProgramStepper(),
                   ],
                 ),
               ],

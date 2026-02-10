@@ -15,12 +15,22 @@ class EventStep {
 class WeddingProgramStepper extends StatelessWidget {
   const WeddingProgramStepper({super.key});
 
-  Widget _timelineItem({required String time, required String title}) {
+  Widget _timelineItem({
+    required String time,
+    required String title,
+    required String icon,
+  }) {
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Center(child: Icon(Icons.home, size: 20, color: Colors.red)),
+          Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: Image.asset(icon, fit: BoxFit.contain),
+            ),
+          ),
           const VerticalDivider(width: 20, thickness: 2, color: Colors.grey),
           Expanded(
             child: Column(
@@ -62,28 +72,31 @@ class WeddingProgramStepper extends StatelessWidget {
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០២:០០ រសៀល',
-                title: 'ពិធីសែនក្រុងពាលី',
+                title: 'ពិធីក្រុងពាលី',
+                icon: 'assets/icon.png',
               ),
             ),
             const SizedBox(width: 16),
-            Expanded(
+            /* Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៣:០០ រសៀល',
-                title: 'ពិធីសូត្រមន្តចម្រើនព្រះបរិត្ត',
+                title: 'ពិធីសូត្រមន្ត',
+                icon: Icons.self_improvement,
               ),
-            ),
+            ), */
           ],
         ),
 
         const SizedBox(height: 16),
 
         /// Row 2
-        Row(
+        /*  Row(
           children: [
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៤:០០ រសៀល',
-                title: 'ពិធីជុំពេលា និងជាវខាន់ស្លា',
+                title: 'ពិធីជាវខាន់ស្លា',
+                icon: Icons.money,
               ),
             ),
             const SizedBox(width: 16),
@@ -91,6 +104,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៥:០០ រសៀល',
                 title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលល្ងាច',
+                icon: Icons.dinner_dining,
               ),
             ),
           ],
@@ -108,7 +122,8 @@ class WeddingProgramStepper extends StatelessWidget {
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៦:៣០ ព្រឹក',
-                title: 'ជួបជុំភ្ញៀវកិត្តិយសដើម្បីរៀបចំហែជំនួន',
+                title: 'ពិធីហែជំនួន',
+                icon: Icons.paragliding,
               ),
             ),
             const SizedBox(width: 16),
@@ -116,6 +131,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៧:០០ ព្រឹក',
                 title: 'ពិធីហែជំនួនកំណត់ចូលរោងជ័យ',
+                icon: Icons.meeting_room,
               ),
             ),
           ],
@@ -128,6 +144,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៧:៣០ ព្រឹក',
                 title: 'ពិធីចៅមហានិយាយជើងការ សែនព្រេង រៀបរាប់ផ្លែឈើ',
+                icon: Icons.local_florist,
               ),
             ),
             const SizedBox(width: 16),
@@ -135,6 +152,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៨:០០ ព្រឹក',
                 title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលព្រឹក',
+                icon: Icons.breakfast_dining,
               ),
             ),
           ],
@@ -147,6 +165,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៩:០០ ព្រឹក',
                 title: 'ពិធីកាត់សក់បង្កក់សិរី កូនប្រុស និងកូនស្រី',
+                icon: Icons.content_cut,
               ),
             ),
             const SizedBox(width: 16),
@@ -154,6 +173,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ១១:០០ ព្រឹក',
                 title: 'ពិធីសំពះផ្ទឹបចង់ដៃ បង្វិលពពិល និងព្រះថោងតោងស្បៃ',
+                icon: Icons.handshake,
               ),
             ),
           ],
@@ -167,6 +187,7 @@ class WeddingProgramStepper extends StatelessWidget {
                 time: 'ម៉ោង ១២:០០ ព្រឹក',
                 title:
                     'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលថ្ងៃត្រង់ បញ្ចប់កិច្ចអាពាហ៍ពិពាហ៍',
+                icon: Icons.lunch_dining,
               ),
             ),
             const SizedBox(width: 16),
@@ -174,10 +195,11 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៥:០០ ល្ងាច',
                 title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាភោជនាហារ',
+                icon: Icons.fastfood,
               ),
             ),
           ],
-        ),
+        ), */
       ],
     );
   }
