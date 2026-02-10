@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
+import 'package:da_ry_invitation/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/date_divider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:video_player/video_player.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -33,7 +35,6 @@ class _WeddingPageState extends State<WeddingPage> {
       });
   }
 
-  int activeStep = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +73,39 @@ class _WeddingPageState extends State<WeddingPage> {
   }
 
   Widget _buildMainContent(BuildContext context) {
+    // Using ResponsiveValue for dynamic sizing and spacing
+    final containerWidth = ResponsiveValue<double>(
+      context,
+      defaultValue: MediaQuery.of(context).size.width * 0.85,
+      conditionalValues: [
+        Condition.largerThan(
+          breakpoint: 600,
+          value: MediaQuery.of(context).size.width * 0.6,
+        ),
+        Condition.largerThan(
+          breakpoint: 1024,
+          value: MediaQuery.of(context).size.width * 0.4,
+        ),
+      ],
+    ).value;
+
+    final containerHeight = ResponsiveValue<double>(
+      context,
+      defaultValue: MediaQuery.of(context).size.height * 0.7,
+      conditionalValues: [
+        Condition.largerThan(
+          breakpoint: 600,
+          value: MediaQuery.of(context).size.height * 0.6,
+        ),
+      ],
+    ).value;
+
+    final verticalSpacing = ResponsiveValue<double>(
+      context,
+      defaultValue: 24.0,
+      conditionalValues: [Condition.largerThan(name: TABLET, value: 32.0)],
+    ).value;
+
     return Column(
       key: const ValueKey(1),
       mainAxisAlignment: MainAxisAlignment.center,
@@ -82,9 +116,9 @@ class _WeddingPageState extends State<WeddingPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
-              height: MediaQuery.sizeOf(context).width * 1,
-              width: MediaQuery.sizeOf(context).width * 0.7,
-              padding: const EdgeInsets.all(24),
+              height: containerHeight,
+              width: containerWidth,
+              padding: EdgeInsets.all(verticalSpacing),
               decoration: BoxDecoration(
                 color: Colors.white.withValues(
                   alpha: 0.1,
@@ -96,57 +130,34 @@ class _WeddingPageState extends State<WeddingPage> {
                 ),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const SelectableText(
+                  SelectableText(
                     'សិរីមង្គលអាពាហ៏ពិពាហ៍',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppStyles.heading2(context),
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 40),
-                  const Text(
+                  Text(
                     'ឆដា & ធារី',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppStyles.heading1(context),
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 40),
-                  const Text(
+                  Text(
                     'សូមគោរពអញ្ជើញ',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppStyles.bodyText(context),
+                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 30),
                   SizedBox(
-                    width: MediaQuery.sizeOf(context).width * 0.8, // long width
-                    height: MediaQuery.sizeOf(context).width * 0.13,
+                    width: containerWidth * 0.8,
+                    height: containerWidth * 0.2,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Image.asset(
-                          'assets/name_box.png',
-                          fit: BoxFit.fill, // stretch to fill width & height
-                        ),
-                        Text(
-                          "Lim Chhorda",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Image.asset('assets/name_box.png', fit: BoxFit.fill),
+                        Text("Lim Chhorda", style: AppStyles.bodyText(context)),
                       ],
                     ),
                   ),
-
-                  Spacer(),
 
                   /// Liquid Glass Button
                   GestureDetector(
@@ -169,23 +180,18 @@ class _WeddingPageState extends State<WeddingPage> {
                               color: Colors.white.withValues(alpha: 0.4),
                             ),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 FontAwesomeIcons.envelopeOpen,
                                 size: 16,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Text(
                                 'បើកធៀប',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 1,
-                                ),
+                                style: AppStyles.buttonText(context),
                               ),
                             ],
                           ),
@@ -202,284 +208,277 @@ class _WeddingPageState extends State<WeddingPage> {
     );
   }
 
+  // --- Refactored Detail Content Widgets ---
+
+  Widget _buildInvitationHeader() {
+    return Text(
+      'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
+      style: AppStyles.heading1(context),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget _buildParentsSection() {
+    final textStyle = AppStyles.bodyText(context);
+    return ResponsiveRowColumn(
+      layout: ResponsiveValue<ResponsiveRowColumnType>(
+        context,
+        defaultValue: ResponsiveRowColumnType.ROW,
+        conditionalValues: [
+          Condition.smallerThan(
+            name: TABLET,
+            value: ResponsiveRowColumnType.ROW,
+          ),
+        ],
+      ).value,
+
+      rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+      rowCrossAxisAlignment: CrossAxisAlignment.center,
+      columnCrossAxisAlignment: CrossAxisAlignment.center,
+
+      columnSpacing: 16,
+      children: [
+        ResponsiveRowColumnItem(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('លោក លីម វាំងធី', style: textStyle),
+              Text('លោកស្រី ហម សុផន', style: textStyle),
+            ],
+          ),
+        ),
+        ResponsiveRowColumnItem(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('លោក ហុក យ៉ុន', style: textStyle),
+              Text('លោកស្រី ឈា ណាវី', style: textStyle),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInvitationMessage() {
+    return Column(
+      children: [
+        Text(
+          'មានកិត្តិយសសូមគោរពអញ្ជើញ',
+          style: AppStyles.bodyText(context),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'សម្តេចទ្រង់ ឯកឧត្តម លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា កញ៉ា លោកជំទាវ លោកលោកស្រី អ្នកនាង កញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធិពរជ័យសិរីសួស្តី ជ័យមង្គល ក្នុងពិធីអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រីរបស់យើងខ្ញុំ',
+          style: AppStyles.subtleText(context),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBrideAndGroomSection() {
+    return ResponsiveRowColumn(
+      layout: ResponsiveValue<ResponsiveRowColumnType>(
+        context,
+        defaultValue: ResponsiveRowColumnType.ROW,
+        conditionalValues: [
+          Condition.smallerThan(
+            name: TABLET,
+            value: ResponsiveRowColumnType.ROW,
+          ),
+        ],
+      ).value,
+
+      rowMainAxisAlignment: MainAxisAlignment.spaceAround,
+      rowVerticalDirection: VerticalDirection.down,
+      rowCrossAxisAlignment: CrossAxisAlignment.center,
+      columnCrossAxisAlignment: CrossAxisAlignment.center,
+
+      columnSpacing: 24,
+      children: [
+        ResponsiveRowColumnItem(
+          child: Column(
+            children: [
+              Text('កូនប្រុសនាម', style: AppStyles.bodyText(context)),
+              Text('លឺម ឆដា', style: AppStyles.heading2(context)),
+            ],
+          ),
+        ),
+        ResponsiveRowColumnItem(
+          child: SizedBox(
+            height: 100,
+            width: 100,
+            child: SvgPicture.asset(
+              'assets/wedding_name.svg',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        ResponsiveRowColumnItem(
+          child: Column(
+            children: [
+              Text('កូនស្រីនាម', style: AppStyles.bodyText(context)),
+              Text('យី សុធារី', style: AppStyles.heading2(context)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEventTimeAndLocation() {
+    return Text(
+      'និងពិសាភោជនាហារដែលនឺងប្រព្រឹត្តទៅនៅ\nថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩ ត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច\nនៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
+      style: AppStyles.bodyText(context),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget _buildEnglishInvitation() {
+    final parentsTextStyle = AppStyles.bodyText(context);
+
+    return Column(
+      children: [
+        Text('Wedding Ceremony', style: AppStyles.heading1(context)),
+        const SizedBox(height: 24),
+        ResponsiveRowColumn(
+          layout: ResponsiveValue<ResponsiveRowColumnType>(
+            context,
+            defaultValue: ResponsiveRowColumnType.ROW,
+            conditionalValues: [
+              Condition.smallerThan(
+                name: TABLET,
+                value: ResponsiveRowColumnType.ROW,
+              ),
+            ],
+          ).value,
+
+          rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+          rowCrossAxisAlignment: CrossAxisAlignment.center,
+          columnCrossAxisAlignment: CrossAxisAlignment.center,
+
+          columnSpacing: 16,
+          children: [
+            ResponsiveRowColumnItem(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('Mr. LIM VANTHY', style: parentsTextStyle),
+                  Text('Mrs. HAM SOPHAN', style: parentsTextStyle),
+                ],
+              ),
+            ),
+            ResponsiveRowColumnItem(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('Mr. HOK YONN', style: parentsTextStyle),
+                  Text('Mrs. CHHEA NAVY', style: parentsTextStyle),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Text(
+          'Cordially request the honor of your presence on the auspicious occasion of the wedding of our children',
+          style: AppStyles.bodyText(context),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 24),
+        ResponsiveRowColumn(
+          layout: ResponsiveValue<ResponsiveRowColumnType>(
+            context,
+            defaultValue: ResponsiveRowColumnType.ROW,
+            conditionalValues: [
+              Condition.smallerThan(
+                name: TABLET,
+                value: ResponsiveRowColumnType.ROW,
+              ),
+            ],
+          ).value,
+
+          rowMainAxisAlignment: MainAxisAlignment.center,
+          columnSpacing: 8,
+          children: [
+            ResponsiveRowColumnItem(
+              child: Text('Lim Chhorda', style: AppStyles.heading2(context)),
+            ),
+            ResponsiveRowColumnItem(
+              child: Text('&', style: AppStyles.heading2(context)),
+            ),
+            ResponsiveRowColumnItem(
+              child: Text('Yi Sotheary', style: AppStyles.heading2(context)),
+            ),
+          ],
+        ),
+        const SizedBox(height: 32),
+        DateDivider(),
+        const SizedBox(height: 32),
+        Text(
+          'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU!',
+          style: AppStyles.bodyText(context),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFooterSection() {
+    return Column(
+      children: [
+        CountdownTimer(
+          targetDate: DateTime(2026, 3, 7, 7, 0), // adjust time if needed
+        ),
+        const SizedBox(height: 32),
+        WeddingProgramStepper(),
+      ],
+    );
+  }
+
   Widget _buildDetailContent(BuildContext context) {
+    // Responsive padding
+    final horizontalPadding = ResponsiveValue<double>(
+      context,
+      defaultValue: 24.0,
+      conditionalValues: [Condition.largerThan(breakpoint: 1024, value: 120.0)],
+    ).value;
+
+    final verticalSpacing = ResponsiveValue<double>(
+      context,
+      defaultValue: 24.0,
+      conditionalValues: [
+        Condition.largerThan(breakpoint: 600, value: 32.0),
+        Condition.largerThan(breakpoint: 1024, value: 40.0),
+      ],
+    ).value;
+
     return SafeArea(
       child: SingleChildScrollView(
         key: const ValueKey(2),
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: verticalSpacing,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'លោក លីម វាំងធី',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'លោកស្រី ហម សុផន',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'លោក ហុក យ៉ុន',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'លោកស្រី ឈា ណាវី',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'មានកិត្តិយសសូមគោរពអញ្ជើញ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'សម្តេចទ្រង់ ឯកឧត្តម លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា កញ៉ា លោកជំទាវ លោកលោកស្រី អ្នកនាង កញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធិពរជ័យសិរីសួស្តី ជ័យមង្គល ក្នុងពិធីអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រីរបស់យើងខ្ញុំ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'កូនប្រុសនាម',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'លឺម ឆដា',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 100,
-                          width: 100,
-                          // color: Colors.red,
-                          child: SvgPicture.asset(
-                            'assets/wedding_name.svg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'កូនស្រីនាម',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'យី សុធារី',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'និងពិសាភោជនាហារដែលនឺងប្រព្រឹត្តទៅនៅ\nថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩ ត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច\nនៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    ///////////////
-                    Text(
-                      'Wedding Ceremony',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Mr. LIM VANTHY',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Mrs. HAM SOPHAN',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Mr. HOK YONN',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Mrs. CHHEA NAVY',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Invitation',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Cordially request the honor\nof your presence on th\nAuspicious occasion of\nThe wedding of our children',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Lim Chhorda',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '&',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Yi Sotheary',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    DateDivider(),
-                    Text(
-                      'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    ///////////////
-                    CountdownTimer(
-                      targetDate: DateTime(
-                        2026,
-                        3,
-                        7,
-                        7,
-                        0,
-                      ), // adjust time if needed
-                    ),
-
-                    WeddingProgramStepper(),
-                  ],
-                ),
-              ],
-            ),
+            _buildInvitationHeader(),
+            SizedBox(height: verticalSpacing),
+            _buildParentsSection(),
+            SizedBox(height: verticalSpacing),
+            _buildInvitationMessage(),
+            SizedBox(height: verticalSpacing),
+            _buildBrideAndGroomSection(),
+            SizedBox(height: verticalSpacing),
+            _buildEventTimeAndLocation(),
+            SizedBox(height: verticalSpacing * 2),
+            _buildEnglishInvitation(),
+            SizedBox(height: verticalSpacing * 2),
+            _buildFooterSection(),
           ],
         ),
       ),

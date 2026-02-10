@@ -92,6 +92,10 @@ flutter:
       fonts:
         - asset: assets/font/Preahvihear-Regular.ttf
           weight: 600
+    - family: Estonia
+      fonts:
+        - asset: assets/font/Estonia-Regular.ttf
+          weight: 600
 
   # fonts:
   #   - family: Schyler
