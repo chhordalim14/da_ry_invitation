@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
+import 'package:da_ry_invitation/widget/date_divider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:video_player/video_player.dart';
@@ -275,7 +276,7 @@ class _WeddingPageState extends State<WeddingPage> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontFamily: 'Khmer',
+
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -284,7 +285,7 @@ class _WeddingPageState extends State<WeddingPage> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontFamily: 'Khmer',
+
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -349,11 +350,121 @@ class _WeddingPageState extends State<WeddingPage> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontFamily: 'Khmer',
+
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    ///////////////
+                    Text(
+                      'Wedding Ceremony',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Mr. LIM VANTHY',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Mrs. HAM SOPHAN',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Mr. HOK YONN',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Mrs. CHHEA NAVY',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Text(
+                      'Invitation',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Cordially request the honor\nof your presence on th\nAuspicious occasion of\nThe wedding of our children',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Lim Chhorda',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '&',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Yi Sotheary',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    DateDivider(),
+                    Text(
+                      'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    ///////////////
                     CountdownTimer(
                       targetDate: DateTime(
                         2026,

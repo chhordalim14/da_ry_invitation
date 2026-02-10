@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class EventStep {
   final String time;
@@ -31,7 +32,8 @@ class WeddingProgramStepper extends StatelessWidget {
               child: Image.asset(icon, fit: BoxFit.contain),
             ),
           ),
-          const VerticalDivider(width: 20, thickness: 2, color: Colors.grey),
+          const AnimatedSoftSCurveLine(width: 20, color: Colors.grey),
+
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -73,30 +75,30 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០២:០០ រសៀល',
                 title: 'ពិធីក្រុងពាលី',
-                icon: 'assets/icon.png',
+                icon: 'assets/icons/icon_13.png',
               ),
             ),
             const SizedBox(width: 16),
-            /* Expanded(
+            Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៣:០០ រសៀល',
                 title: 'ពិធីសូត្រមន្ត',
-                icon: Icons.self_improvement,
+                icon: 'assets/icons/icon_14.png',
               ),
-            ), */
+            ),
           ],
         ),
 
         const SizedBox(height: 16),
 
         /// Row 2
-        /*  Row(
+        Row(
           children: [
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៤:០០ រសៀល',
                 title: 'ពិធីជាវខាន់ស្លា',
-                icon: Icons.money,
+                icon: 'assets/icons/icon_15.png',
               ),
             ),
             const SizedBox(width: 16),
@@ -104,7 +106,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៥:០០ រសៀល',
                 title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលល្ងាច',
-                icon: Icons.dinner_dining,
+                icon: 'assets/icons/icon_17.png',
               ),
             ),
           ],
@@ -123,19 +125,27 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៦:៣០ ព្រឹក',
                 title: 'ពិធីហែជំនួន',
-                icon: Icons.paragliding,
+                icon: 'assets/icons/icon_17.png',
               ),
             ),
             const SizedBox(width: 16),
-            Expanded(
+            /* Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៧:០០ ព្រឹក',
                 title: 'ពិធីហែជំនួនកំណត់ចូលរោងជ័យ',
-                icon: Icons.meeting_room,
+                icon: 'assets/icons/icon_1.png',
+              ),
+            ), */
+            Expanded(
+              child: _timelineItem(
+                time: 'ម៉ោង ០៧:០០ ព្រឹក',
+                title: 'ពិធីចៅមហានិយាយជើងការ',
+                icon: 'assets/icons/icon_1.png',
               ),
             ),
           ],
         ),
+        const SizedBox(height: 16),
 
         /// Row 4
         Row(
@@ -143,20 +153,21 @@ class WeddingProgramStepper extends StatelessWidget {
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៧:៣០ ព្រឹក',
-                title: 'ពិធីចៅមហានិយាយជើងការ សែនព្រេង រៀបរាប់ផ្លែឈើ',
-                icon: Icons.local_florist,
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលព្រឹក',
+                icon: 'assets/icons/icon_17.png',
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៨:០០ ព្រឹក',
-                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលព្រឹក',
-                icon: Icons.breakfast_dining,
+                title: 'ពិធីបំពាក់ចិញ្ចៀន',
+                icon: 'assets/icons/icon_2.png',
               ),
             ),
           ],
         ),
+        const SizedBox(height: 16),
 
         /// Row 5
         Row(
@@ -165,19 +176,21 @@ class WeddingProgramStepper extends StatelessWidget {
               child: _timelineItem(
                 time: 'ម៉ោង ០៩:០០ ព្រឹក',
                 title: 'ពិធីកាត់សក់បង្កក់សិរី កូនប្រុស និងកូនស្រី',
-                icon: Icons.content_cut,
+                icon: 'assets/icons/icon_10.png',
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ១១:០០ ព្រឹក',
-                title: 'ពិធីសំពះផ្ទឹបចង់ដៃ បង្វិលពពិល និងព្រះថោងតោងស្បៃ',
-                icon: Icons.handshake,
+                // title: 'ពិធីសំពះផ្ទឹបចង់ដៃ បង្វិលពពិល និងព្រះថោងតោងស្បៃ',
+                title: 'ពិធីសំពះផ្ទឹបចង់ដៃ',
+                icon: 'assets/icons/icon_3.png',
               ),
             ),
           ],
         ),
+        const SizedBox(height: 16),
 
         /// Row 6
         Row(
@@ -187,20 +200,103 @@ class WeddingProgramStepper extends StatelessWidget {
                 time: 'ម៉ោង ១២:០០ ព្រឹក',
                 title:
                     'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលថ្ងៃត្រង់ បញ្ចប់កិច្ចអាពាហ៍ពិពាហ៍',
-                icon: Icons.lunch_dining,
+                icon: 'assets/icons/icon_1.png',
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៥:០០ ល្ងាច',
-                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាភោជនាហារ',
-                icon: Icons.fastfood,
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាភោជនាហារពេលល្ងាច',
+                icon: 'assets/icons/icon_16.png',
               ),
             ),
           ],
-        ), */
+        ),
       ],
     );
   }
+}
+
+class AnimatedSoftSCurveLine extends StatelessWidget {
+  const AnimatedSoftSCurveLine({
+    super.key,
+    this.width = 20,
+    this.color = Colors.grey,
+  });
+
+  final double width;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+          width: width,
+          child: CustomPaint(
+            painter: SoftSCurveLinePainter(
+              color: color,
+              strokeWidth: 2,
+              curveAmount: 6, // 🔹 tweak: 4–8 recommended
+            ),
+          ),
+        )
+        // 👇 tiny breathing animation
+        .animate(onPlay: (controller) => controller.repeat(reverse: true))
+        .slideX(
+          begin: -0.01,
+          end: 0.01,
+          duration: 1800.ms,
+          curve: Curves.easeInOut,
+        );
+  }
+}
+
+class SoftSCurveLinePainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  final double curveAmount; // 👈 control how strong the S is
+
+  SoftSCurveLinePainter({
+    required this.color,
+    this.strokeWidth = 2,
+    this.curveAmount = 6, // 🔹 small value = subtle curve
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    final path = Path();
+
+    path.moveTo(size.width / 2, 0);
+
+    // Top → middle (curve right)
+    path.cubicTo(
+      size.width / 2 + curveAmount,
+      size.height * 0.25,
+      size.width / 2 + curveAmount,
+      size.height * 0.25,
+      size.width / 2,
+      size.height * 0.5,
+    );
+
+    // Middle → bottom (curve left)
+    path.cubicTo(
+      size.width / 2 - curveAmount,
+      size.height * 0.75,
+      size.width / 2 - curveAmount,
+      size.height * 0.75,
+      size.width / 2,
+      size.height,
+    );
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
