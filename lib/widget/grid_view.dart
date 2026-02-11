@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:da_ry_invitation/page/full_screen_image_view.dart'; // Import the new full screen image view
 
 class MasonryGridExample extends StatelessWidget {
   MasonryGridExample({super.key});
 
-  final List<double> heights = List.generate(
-    20,
-    (index) => (100 + (index % 5) * 40).toDouble(),
-  );
+  final List<String> weddingImagePaths = const [
+    'assets/wedding/RAK_6358.jpg',
+    'assets/wedding/RAK_6371.jpg',
+    'assets/wedding/RAK_6471.jpg',
+    'assets/wedding/RAK_6576.jpg',
+    'assets/wedding/RAK_6851.jpg',
+    'assets/wedding/RAK_6862.jpg',
+    'assets/wedding/RAK_6874.jpg',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +26,15 @@ class MasonryGridExample extends StatelessWidget {
         double leftHeight = 0;
         double rightHeight = 0;
 
-        for (int i = 0; i < heights.length; i++) {
-          final item = _buildItem(i, heights[i], columnWidth);
+        for (int i = 0; i < weddingImagePaths.length; i++) {
+          final item = _buildItem(context, weddingImagePaths[i], columnWidth); // Pass context
 
           if (leftHeight <= rightHeight) {
             leftColumn.add(item);
-            leftHeight += heights[i];
+            leftHeight += (columnWidth * 1.2);
           } else {
             rightColumn.add(item);
-            rightHeight += heights[i];
+            rightHeight += (columnWidth * 1.2);
           }
         }
 
@@ -51,19 +57,30 @@ class MasonryGridExample extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(int index, double height, double width) {
-    return Container(
-      width: width,
-      height: height,
-      margin: const EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        color: Colors.primaries[index % Colors.primaries.length],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: Text(
-          "Item $index",
-          style: const TextStyle(color: Colors.white, fontSize: 18),
+  Widget _buildItem(BuildContext context, String imagePath, double width) { // Accept context
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FullScreenImageView(imagePath: imagePath),
+          ),
+        );
+      },
+      child: Container(
+        width: width,
+        margin: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.high,
+            width: width,
+          ),
         ),
       ),
     );

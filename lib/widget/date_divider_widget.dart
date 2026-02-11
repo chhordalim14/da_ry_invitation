@@ -18,7 +18,7 @@ class DateDivider extends StatelessWidget {
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],
@@ -60,7 +60,7 @@ class DateDivider extends StatelessWidget {
                       shadows: [
                         Shadow(
                           color: Color.fromARGB(255, 213, 164, 39),
-                          offset: Offset(4, 4),
+                          offset: Offset(3, 3),
                           blurRadius: 2,
                         ),
                       ],
@@ -77,7 +77,7 @@ class DateDivider extends StatelessWidget {
                       shadows: [
                         Shadow(
                           color: Color.fromARGB(255, 213, 164, 39),
-                          offset: Offset(4, 4),
+                          offset: Offset(3, 3),
                           blurRadius: 2,
                         ),
                       ],
@@ -94,7 +94,7 @@ class DateDivider extends StatelessWidget {
                       shadows: [
                         Shadow(
                           color: Color.fromARGB(255, 213, 164, 39),
-                          offset: Offset(4, 4),
+                          offset: Offset(3, 3),
                           blurRadius: 2,
                         ),
                       ],
@@ -133,7 +133,7 @@ class DateDivider extends StatelessWidget {
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],

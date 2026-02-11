@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
@@ -160,9 +161,7 @@ class _WeddingPageState extends State<WeddingPage> {
               ),
               Text(
                 'សូមគោរពអញ្ជើញ',
-                style: AppStyles.bodyText(
-                  context,
-                ).copyWith(color: Colors.blueGrey.shade700),
+                style: AppStyles.bodyText(context).copyWith(color: colorsApp),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -230,10 +229,11 @@ class _WeddingPageState extends State<WeddingPage> {
         color: Colors.amber[700],
         // fontSize: 18,
         fontWeight: FontWeight.bold,
+        fontFamily: 'Moulpali',
         shadows: [
           Shadow(
             color: Color.fromARGB(255, 213, 164, 39),
-            offset: Offset(4, 4),
+            offset: Offset(3, 3),
             blurRadius: 2,
           ),
         ],
@@ -247,10 +247,11 @@ class _WeddingPageState extends State<WeddingPage> {
       color: Colors.amber[700],
       // fontSize: 18,
       fontWeight: FontWeight.bold,
+      fontFamily: 'Moulpali',
       shadows: [
         Shadow(
           color: Color.fromARGB(255, 213, 164, 39),
-          offset: Offset(4, 4),
+          offset: Offset(3, 3),
           blurRadius: 2,
         ),
       ],
@@ -307,7 +308,7 @@ class _WeddingPageState extends State<WeddingPage> {
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],
@@ -317,9 +318,7 @@ class _WeddingPageState extends State<WeddingPage> {
         const SizedBox(height: 16),
         Text(
           'សម្តេចទ្រង់ ឯកឧត្តម លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា កញ៉ា លោកជំទាវ លោកលោកស្រី អ្នកនាង កញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធិពរជ័យសិរីសួស្តី ជ័យមង្គល ក្នុងពិធីអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រីរបស់យើងខ្ញុំ',
-          style: AppStyles.bodyText(
-            context,
-          ).copyWith(color: Colors.blueGrey.shade700),
+          style: AppStyles.bodyText(context).copyWith(color: colorsApp),
           textAlign: TextAlign.center,
         ),
       ],
@@ -358,7 +357,7 @@ class _WeddingPageState extends State<WeddingPage> {
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
-                      offset: Offset(4, 4),
+                      offset: Offset(3, 3),
                       blurRadius: 2,
                     ),
                   ],
@@ -370,10 +369,11 @@ class _WeddingPageState extends State<WeddingPage> {
                   color: Colors.amber[700],
                   // fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Moulpali',
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
-                      offset: Offset(4, 4),
+                      offset: Offset(3, 3),
                       blurRadius: 2,
                     ),
                   ],
@@ -404,7 +404,7 @@ class _WeddingPageState extends State<WeddingPage> {
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
-                      offset: Offset(4, 4),
+                      offset: Offset(3, 3),
                       blurRadius: 2,
                     ),
                   ],
@@ -416,10 +416,11 @@ class _WeddingPageState extends State<WeddingPage> {
                   color: Colors.amber[700],
                   // fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Moulpali',
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
-                      offset: Offset(4, 4),
+                      offset: Offset(3, 3),
                       blurRadius: 2,
                     ),
                   ],
@@ -435,9 +436,7 @@ class _WeddingPageState extends State<WeddingPage> {
   Widget _buildEventTimeAndLocation() {
     return Text(
       'និងពិសាភោជនាហារដែលនឺងប្រព្រឹត្តទៅនៅ\nថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩ ត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច\nនៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
-      style: AppStyles.bodyText(
-        context,
-      ).copyWith(color: Colors.blueGrey.shade700),
+      style: AppStyles.bodyText(context).copyWith(color: colorsApp),
       textAlign: TextAlign.center,
     );
   }
@@ -447,10 +446,11 @@ class _WeddingPageState extends State<WeddingPage> {
       color: Colors.amber[700],
       // fontSize: 18,
       fontWeight: FontWeight.bold,
+      // fontFamily: 'Playball',
       shadows: [
         Shadow(
           color: Color.fromARGB(255, 213, 164, 39),
-          offset: Offset(4, 4),
+          offset: Offset(3, 3),
           blurRadius: 2,
         ),
       ],
@@ -464,10 +464,11 @@ class _WeddingPageState extends State<WeddingPage> {
             color: Colors.amber[700],
             // fontSize: 18,
             fontWeight: FontWeight.bold,
+            // fontFamily: ,
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],
@@ -516,10 +517,10 @@ class _WeddingPageState extends State<WeddingPage> {
         Text(
           'Cordially request the honor of your presence on the auspicious occasion of the wedding of our children',
           style: AppStyles.heading2(context).copyWith(
-            color: Colors.blueGrey.shade700,
-            fontSize: 30,
-
-            fontFamily: 'Estonia',
+            color: colorsApp,
+            fontSize: 25,
+            fontFamily: 'Playball',
+            fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.center,
         ),
@@ -550,7 +551,7 @@ class _WeddingPageState extends State<WeddingPage> {
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
-                      offset: Offset(4, 4),
+                      offset: Offset(3, 3),
                       blurRadius: 2,
                     ),
                   ],
@@ -559,7 +560,7 @@ class _WeddingPageState extends State<WeddingPage> {
             ),
             ResponsiveRowColumnItem(
               child: Text(
-                '&',
+                ' & ',
                 style: AppStyles.heading1(
                   context,
                 ).copyWith(color: Colors.amber[700], fontFamily: 'TwinkleStar'),
@@ -576,7 +577,7 @@ class _WeddingPageState extends State<WeddingPage> {
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
-                      offset: Offset(4, 4),
+                      offset: Offset(3, 3),
                       blurRadius: 2,
                     ),
                   ],
@@ -590,9 +591,7 @@ class _WeddingPageState extends State<WeddingPage> {
         const SizedBox(height: 32),
         Text(
           'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU!',
-          style: AppStyles.bodyText(
-            context,
-          ).copyWith(color: Colors.blueGrey.shade700),
+          style: AppStyles.bodyText(context).copyWith(color: colorsApp),
           textAlign: TextAlign.center,
         ),
       ],
@@ -615,7 +614,7 @@ class _WeddingPageState extends State<WeddingPage> {
     return Column(
       children: [
         Text(
-          'ទីតាំងពិធីអាពាហ៍ពិពាហ៍',
+          'ទីតាំងពិធីអាពាហ៍ពិពាហ៍ / Location',
           style: AppStyles.heading2(context).copyWith(
             color: Colors.amber[700],
             // fontSize: 18,
@@ -623,7 +622,7 @@ class _WeddingPageState extends State<WeddingPage> {
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],
@@ -741,7 +740,7 @@ class _WeddingPageState extends State<WeddingPage> {
                 shadows: [
                   Shadow(
                     color: Color.fromARGB(255, 213, 164, 39),
-                    offset: Offset(4, 4),
+                    offset: Offset(3, 3),
                     blurRadius: 2,
                   ),
                 ],

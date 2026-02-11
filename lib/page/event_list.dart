@@ -1,3 +1,4 @@
+import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -32,27 +33,21 @@ class WeddingProgramStepper extends StatelessWidget {
               child: Image.asset(icon, fit: BoxFit.contain),
             ),
           ),
-          AnimatedSoftSCurveLine(width: 20, color: Colors.blueGrey.shade700),
+          AnimatedSoftSCurveLine(width: 20, color: colorsApp),
 
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  time,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.blueGrey.shade700,
-                  ),
-                ),
+                Text(time, style: TextStyle(fontSize: 13, color: colorsApp)),
                 const SizedBox(height: 4),
                 Text(
                   title,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.blueGrey.shade700,
+                    color: colorsApp,
                   ),
                 ),
               ],
@@ -78,7 +73,7 @@ class WeddingProgramStepper extends StatelessWidget {
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],
@@ -140,7 +135,7 @@ class WeddingProgramStepper extends StatelessWidget {
             shadows: [
               Shadow(
                 color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(4, 4),
+                offset: Offset(3, 3),
                 blurRadius: 2,
               ),
             ],

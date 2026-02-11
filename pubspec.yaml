@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/wedding/
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
