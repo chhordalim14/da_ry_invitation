@@ -10,47 +10,44 @@ class MasonryGridExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Custom Masonry Grid")),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final columnWidth = constraints.maxWidth / 2;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columnWidth = constraints.maxWidth / 2;
 
-          List<Widget> leftColumn = [];
-          List<Widget> rightColumn = [];
+        List<Widget> leftColumn = [];
+        List<Widget> rightColumn = [];
 
-          double leftHeight = 0;
-          double rightHeight = 0;
+        double leftHeight = 0;
+        double rightHeight = 0;
 
-          for (int i = 0; i < heights.length; i++) {
-            final item = _buildItem(i, heights[i], columnWidth);
+        for (int i = 0; i < heights.length; i++) {
+          final item = _buildItem(i, heights[i], columnWidth);
 
-            if (leftHeight <= rightHeight) {
-              leftColumn.add(item);
-              leftHeight += heights[i];
-            } else {
-              rightColumn.add(item);
-              rightHeight += heights[i];
-            }
+          if (leftHeight <= rightHeight) {
+            leftColumn.add(item);
+            leftHeight += heights[i];
+          } else {
+            rightColumn.add(item);
+            rightHeight += heights[i];
           }
+        }
 
-          return SingleChildScrollView(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: columnWidth,
-                  child: Column(children: leftColumn),
-                ),
-                SizedBox(
-                  width: columnWidth,
-                  child: Column(children: rightColumn),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+        return SingleChildScrollView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: columnWidth,
+                child: Column(children: leftColumn),
+              ),
+              SizedBox(
+                width: columnWidth,
+                child: Column(children: rightColumn),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

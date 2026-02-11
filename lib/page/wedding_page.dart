@@ -3,6 +3,7 @@ import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/date_divider_widget.dart';
+import 'package:da_ry_invitation/widget/grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -745,7 +746,7 @@ class _WeddingPageState extends State<WeddingPage> {
               ),
             ),
             SizedBox(height: verticalSpacing * 2),
-
+            MasonryGridExample(),
             SizedBox(height: verticalSpacing * 3),
           ],
         ),

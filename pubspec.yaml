@@ -95,6 +95,18 @@ flutter:
       fonts:
         - asset: assets/font/Estonia-Regular.ttf
           weight: 600
+    - family: Moulpali
+      fonts:
+        - asset: assets/font/Moulpali-Regular.ttf
+          weight: 600
+    - family: Playball
+      fonts:
+        - asset: assets/font/Playball-Regular.ttf
+          weight: 600
+    - family: TwinkleStar
+      fonts:
+        - asset: assets/font/TwinkleStar-Regular.ttf
+          weight: 600
 
   # fonts:
   #   - family: Schyler
