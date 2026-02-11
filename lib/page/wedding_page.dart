@@ -542,10 +542,11 @@ class _WeddingPageState extends State<WeddingPage> {
             ResponsiveRowColumnItem(
               child: Text(
                 'Lim Chhorda',
-                style: AppStyles.heading2(context).copyWith(
+                style: AppStyles.heading1(context).copyWith(
                   color: Colors.amber[700],
                   // fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'TwinkleStar',
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
@@ -559,18 +560,19 @@ class _WeddingPageState extends State<WeddingPage> {
             ResponsiveRowColumnItem(
               child: Text(
                 '&',
-                style: AppStyles.heading2(
+                style: AppStyles.heading1(
                   context,
-                ).copyWith(color: Colors.amber[700]),
+                ).copyWith(color: Colors.amber[700], fontFamily: 'TwinkleStar'),
               ),
             ),
             ResponsiveRowColumnItem(
               child: Text(
                 'Yi Sotheary',
-                style: AppStyles.heading2(context).copyWith(
+                style: AppStyles.heading1(context).copyWith(
                   color: Colors.amber[700],
                   // fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'TwinkleStar',
                   shadows: [
                     Shadow(
                       color: Color.fromARGB(255, 213, 164, 39),
