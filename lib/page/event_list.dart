@@ -32,7 +32,7 @@ class WeddingProgramStepper extends StatelessWidget {
               child: Image.asset(icon, fit: BoxFit.contain),
             ),
           ),
-          const AnimatedSoftSCurveLine(width: 20, color: Colors.blueGrey),
+          AnimatedSoftSCurveLine(width: 20, color: Colors.blueGrey.shade700),
 
           Expanded(
             child: Column(
@@ -41,15 +41,18 @@ class WeddingProgramStepper extends StatelessWidget {
               children: [
                 Text(
                   time,
-                  style: const TextStyle(fontSize: 13, color: Colors.blueGrey),
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.blueGrey.shade700,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.blueGrey,
+                    color: Colors.blueGrey.shade700,
                   ),
                 ),
               ],
