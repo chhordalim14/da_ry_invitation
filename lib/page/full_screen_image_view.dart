@@ -13,10 +13,7 @@ class FullScreenImageView extends StatelessWidget {
         children: [
           Center(
             child: InteractiveViewer(
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset(imagePath, fit: BoxFit.contain),
             ),
           ),
           Positioned(

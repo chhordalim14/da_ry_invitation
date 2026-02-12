@@ -28,8 +28,8 @@ class WeddingProgramStepper extends StatelessWidget {
         children: [
           Center(
             child: SizedBox(
-              width: 50,
-              height: 50,
+              width: 40,
+              height: 40,
               child: Image.asset(icon, fit: BoxFit.contain),
             ),
           ),
@@ -70,13 +70,7 @@ class WeddingProgramStepper extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.amber[700],
-            shadows: [
-              Shadow(
-                color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(3, 3),
-                blurRadius: 2,
-              ),
-            ],
+            
           ),
         ),
         const SizedBox(height: 20),
@@ -132,13 +126,7 @@ class WeddingProgramStepper extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.amber[700],
 
-            shadows: [
-              Shadow(
-                color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(3, 3),
-                blurRadius: 2,
-              ),
-            ],
+           
           ),
         ),
         const SizedBox(height: 20),
@@ -200,7 +188,7 @@ class WeddingProgramStepper extends StatelessWidget {
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៩:០០ ព្រឹក',
-                title: 'ពិធីកាត់សក់បង្កក់សិរី កូនប្រុស និងកូនស្រី',
+                title: 'ពិធីកាត់សក់ កូនប្រុស និងកូនស្រី',
                 icon: 'assets/icons/icon_10.png',
               ),
             ),
@@ -223,8 +211,7 @@ class WeddingProgramStepper extends StatelessWidget {
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ១២:០០ ព្រឹក',
-                title:
-                    'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលថ្ងៃត្រង់ បញ្ចប់កិច្ចអាពាហ៍ពិពាហ៍',
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលថ្ងៃត្រង់',
                 icon: 'assets/icons/icon_1.png',
               ),
             ),
@@ -232,7 +219,7 @@ class WeddingProgramStepper extends StatelessWidget {
             Expanded(
               child: _timelineItem(
                 time: 'ម៉ោង ០៥:០០ ល្ងាច',
-                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាភោជនាហារពេលល្ងាច',
+                title: 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាហារពេលល្ងាច',
                 icon: 'assets/icons/icon_16.png',
               ),
             ),
@@ -260,8 +247,8 @@ class AnimatedSoftSCurveLine extends StatelessWidget {
           child: CustomPaint(
             painter: SoftSCurveLinePainter(
               color: color,
-              strokeWidth: 2,
-              curveAmount: 6, // 🔹 tweak: 4–8 recommended
+              strokeWidth: 1,
+              curveAmount: 3, // 🔹 tweak: 4–8 recommended
             ),
           ),
         )
@@ -283,8 +270,8 @@ class SoftSCurveLinePainter extends CustomPainter {
 
   SoftSCurveLinePainter({
     required this.color,
-    this.strokeWidth = 2,
-    this.curveAmount = 6, // 🔹 small value = subtle curve
+    this.strokeWidth = 1,
+    this.curveAmount = 3, // 🔹 small value = subtle curve
   });
 
   @override

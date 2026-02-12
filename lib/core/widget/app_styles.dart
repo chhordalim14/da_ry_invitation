@@ -48,6 +48,22 @@ class AppStyles {
     );
   }
 
+  static TextStyle bodyText1(BuildContext context) {
+    return TextStyle(
+      color: Colors.white,
+      height: 1.5, // Improved line spacing for readability
+      fontSize: ResponsiveValue<double>(
+        context,
+        defaultValue: 18.0,
+        conditionalValues: [
+          Condition.largerThan(name: TABLET, value: 20.0),
+          Condition.largerThan(name: DESKTOP, value: 22.0),
+        ],
+      ).value,
+      fontWeight: FontWeight.w500, // Medium weight for body text
+    );
+  }
+
   static TextStyle subtleText(BuildContext context) {
     return TextStyle(
       color: Colors.white.withValues(alpha: 0.8),

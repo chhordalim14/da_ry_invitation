@@ -15,13 +15,7 @@ class DateDivider extends StatelessWidget {
             letterSpacing: 2,
             color: Colors.amber[700],
 
-            shadows: [
-              Shadow(
-                color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(3, 3),
-                blurRadius: 2,
-              ),
-            ],
+           
           ),
         ),
 
@@ -57,13 +51,7 @@ class DateDivider extends StatelessWidget {
                       color: Colors.amber[700],
                       // fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          color: Color.fromARGB(255, 213, 164, 39),
-                          offset: Offset(3, 3),
-                          blurRadius: 2,
-                        ),
-                      ],
+                      
                     ),
                   ),
                   SizedBox(width: 12),
@@ -74,13 +62,7 @@ class DateDivider extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.amber[700],
 
-                      shadows: [
-                        Shadow(
-                          color: Color.fromARGB(255, 213, 164, 39),
-                          offset: Offset(3, 3),
-                          blurRadius: 2,
-                        ),
-                      ],
+                      
                     ),
                   ),
                   SizedBox(width: 12),
@@ -91,13 +73,7 @@ class DateDivider extends StatelessWidget {
                       color: Colors.amber[700],
                       // fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                          color: Color.fromARGB(255, 213, 164, 39),
-                          offset: Offset(3, 3),
-                          blurRadius: 2,
-                        ),
-                      ],
+                      
                     ),
                   ),
                 ],
@@ -130,13 +106,7 @@ class DateDivider extends StatelessWidget {
             letterSpacing: 2,
             color: Colors.amber[700],
 
-            shadows: [
-              Shadow(
-                color: Color.fromARGB(255, 213, 164, 39),
-                offset: Offset(3, 3),
-                blurRadius: 2,
-              ),
-            ],
+           
           ),
         ),
       ],

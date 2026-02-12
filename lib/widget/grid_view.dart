@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:da_ry_invitation/page/full_screen_image_view.dart'; // Import the new full screen image view
 
 class MasonryGridExample extends StatelessWidget {
-  MasonryGridExample({super.key});
+  const MasonryGridExample({super.key});
 
   final List<String> weddingImagePaths = const [
     'assets/wedding/RAK_6358.jpg',
@@ -27,7 +27,11 @@ class MasonryGridExample extends StatelessWidget {
         double rightHeight = 0;
 
         for (int i = 0; i < weddingImagePaths.length; i++) {
-          final item = _buildItem(context, weddingImagePaths[i], columnWidth); // Pass context
+          final item = _buildItem(
+            context,
+            weddingImagePaths[i],
+            columnWidth,
+          ); // Pass context
 
           if (leftHeight <= rightHeight) {
             leftColumn.add(item);
@@ -57,7 +61,8 @@ class MasonryGridExample extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, String imagePath, double width) { // Accept context
+  Widget _buildItem(BuildContext context, String imagePath, double width) {
+    // Accept context
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -70,9 +75,7 @@ class MasonryGridExample extends StatelessWidget {
       child: Container(
         width: width,
         margin: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Image.asset(
