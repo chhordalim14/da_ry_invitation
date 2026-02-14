@@ -1,10 +1,11 @@
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
+import 'package:da_ry_invitation/widget/scroll_fade.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ParentSectionWidget extends StatelessWidget {
-  const ParentSectionWidget({super.key});
-
+  const ParentSectionWidget({required this.scrollController, super.key});
+  final ScrollController scrollController;
   @override
   Widget build(BuildContext context) {
     final normalTextStyle = AppStyles.bodyText(context).copyWith(
@@ -42,9 +43,19 @@ class ParentSectionWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('លោក លីម វាំងធី', style: normalTextStyle),
+              ScrollFade(
+                controller: scrollController,
+                start: 50,
+                end: 150,
+                child: Text('លោក លីម វាំងធី', style: textStyle),
+              ),
               SizedBox(height: 8),
-              Text('លោកស្រី ហម សុផន', style: textStyle),
+              ScrollFade(
+                controller: scrollController,
+                start: 100,
+                end: 200,
+                child: Text('លោកស្រី ហម សុផន', style: textStyle),
+              ),
             ],
           ),
         ),
@@ -52,9 +63,19 @@ class ParentSectionWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('លោក ហុក យ៉ុន', style: normalTextStyle),
+              ScrollFade(
+                controller: scrollController,
+                start: 50,
+                end: 150,
+                child: Text('លោក ហុក យ៉ុន', style: textStyle),
+              ),
               SizedBox(height: 8),
-              Text('លោកស្រី ឈា ណាវី', style: textStyle),
+              ScrollFade(
+                controller: scrollController,
+                start: 100,
+                end: 200,
+                child: Text('លោកស្រី ឈា ណាវី', style: textStyle),
+              ),
             ],
           ),
         ),

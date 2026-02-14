@@ -60,7 +60,7 @@ class AppStyles {
           Condition.largerThan(name: DESKTOP, value: 22.0),
         ],
       ).value,
-      fontWeight: FontWeight.w500, // Medium weight for body text
+      fontWeight: FontWeight.w400, // Medium weight for body text
     );
   }
 

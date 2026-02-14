@@ -5,13 +5,7 @@ class MasonryGridExample extends StatelessWidget {
   const MasonryGridExample({super.key});
 
   final List<String> weddingImagePaths = const [
-    'assets/wedding/RAK_6358.jpg',
-    'assets/wedding/RAK_6371.jpg',
-    'assets/wedding/RAK_6471.jpg',
-    'assets/wedding/RAK_6576.jpg',
-    'assets/wedding/RAK_6851.jpg',
-    'assets/wedding/RAK_6862.jpg',
-    'assets/wedding/RAK_6874.jpg',
+    'https://nextcloud.sabay.com/index.php/core/preview?fileId=7402343&x=1920&y=1080&a=true',
   ];
 
   @override
@@ -78,11 +72,12 @@ class MasonryGridExample extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
+          child: Image.network(
             imagePath,
             fit: BoxFit.cover,
-            filterQuality: FilterQuality.high,
+            // filterQuality: FilterQuality.high,
             width: width,
+            webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
           ),
         ),
       ),

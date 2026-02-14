@@ -44,6 +44,7 @@ dependencies:
   video_player: ^2.10.1
   flutter_svg: ^2.2.3
   easy_stepper: ^1.0.1
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:
@@ -88,25 +89,17 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Preahvihear
-      fonts:
-        - asset: assets/font/Preahvihear-Regular.ttf
-          weight: 600
-    - family: Estonia
-      fonts:
-        - asset: assets/font/Estonia-Regular.ttf
-          weight: 600
     - family: Moulpali
       fonts:
         - asset: assets/font/Moulpali-Regular.ttf
           weight: 600
-    - family: Playball
+    - family: KantumruyPro
       fonts:
-        - asset: assets/font/Playball-Regular.ttf
+        - asset: assets/font/KantumruyPro-Regular.ttf
           weight: 600
-    - family: TwinkleStar
+    - family: IMFellEnglishSC
       fonts:
-        - asset: assets/font/TwinkleStar-Regular.ttf
+        - asset: assets/font/IMFellEnglishSC-Regular.ttf
           weight: 600
 
   # fonts:

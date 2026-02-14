@@ -5,10 +5,14 @@ import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/bride_groom_section_widget.dart';
 import 'package:da_ry_invitation/widget/english_invitaion_widget.dart';
+import 'package:da_ry_invitation/widget/grid_view.dart';
 import 'package:da_ry_invitation/widget/invitation_message_widget.dart';
 import 'package:da_ry_invitation/widget/location_section_widget.dart';
 import 'package:da_ry_invitation/widget/parent_section_widget.dart';
+import 'package:da_ry_invitation/widget/scroll_fade.dart';
+import 'package:da_ry_invitation/widget/scroll_reveal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:video_player/video_player.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,26 +27,18 @@ class WeddingPage extends StatefulWidget {
 class _WeddingPageState extends State<WeddingPage> {
   late VideoPlayerController _controller;
   bool _showDetail = false; // Toggle UI
-  final ScrollController _scrollController = ScrollController();
-  double _headerOpacity = 1.0;
+  late ScrollController _scrollController;
+  double _scrollOffset = 0;
   @override
   void initState() {
     super.initState();
     // Listen to scroll
-    _scrollController.addListener(() {
-      double offset = _scrollController.offset;
-
-      // Decide opacity based on scroll
-      double newOpacity = 1 - (offset / 50); // fade out over 100px
-      if (newOpacity < 0) newOpacity = 0;
-      if (newOpacity > 1) newOpacity = 1;
-
-      if (newOpacity != _headerOpacity) {
+    _scrollController = ScrollController()
+      ..addListener(() {
         setState(() {
-          _headerOpacity = newOpacity;
+          _scrollOffset = _scrollController.offset;
         });
-      }
-    });
+      });
     // // Initialize video controller
     // _controller = VideoPlayerController.asset('assets/gif_background.MOV')
     //   ..initialize().then((_) {
@@ -59,6 +55,26 @@ class _WeddingPageState extends State<WeddingPage> {
     _scrollController.dispose();
     super.dispose();
   }
+
+  // Widget scrollFadeText({
+  //   required Widget child,
+  //   required double start,
+  //   required double end,
+  //   Curve curve = Curves.easeOut,
+  // }) {
+  //   double opacity;
+
+  //   if (_scrollOffset <= start) {
+  //     opacity = 1;
+  //   } else if (_scrollOffset >= end) {
+  //     opacity = 0;
+  //   } else {
+  //     double progress = (_scrollOffset - start) / (end - start);
+  //     opacity = 1 - curve.transform(progress);
+  //   }
+
+  //   return Opacity(opacity: opacity.clamp(0.0, 1.0), child: child);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +107,15 @@ class _WeddingPageState extends State<WeddingPage> {
               child: _showDetail
                   ? _buildDetailContent(context)
                   : _buildMainContent(context),
+            ),
+          ),
+          Positioned(
+            bottom: 40,
+            right: 10,
+            child: Icon(
+              FontAwesomeIcons.play,
+              color: Colors.amber.shade700,
+              size: 25,
             ),
           ),
         ],
@@ -205,9 +230,10 @@ class _WeddingPageState extends State<WeddingPage> {
   // --- Refactored Detail Content Widgets ---
 
   Widget _buildInvitationHeader() {
-    return AnimatedOpacity(
-      opacity: _headerOpacity,
-      duration: const Duration(milliseconds: 300),
+    return ScrollFade(
+      controller: _scrollController,
+      start: 0,
+      end: 100,
       child: Text(
         'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
         style: AppStyles.heading1(context).copyWith(
@@ -221,22 +247,17 @@ class _WeddingPageState extends State<WeddingPage> {
   }
 
   Widget _buildEventTimeAndLocation() {
-    return Text(
-      'និងពិសាភោជនាហារដែលនឺងប្រព្រឹត្តទៅនៅ\nថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩ ត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច\nនៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
-      style: AppStyles.bodyText(context).copyWith(color: colorsApp),
-      textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _buildFooterSection() {
-    return Column(
-      children: [
-        CountdownTimer(
-          targetDate: DateTime(2026, 3, 7, 7, 0), // adjust time if needed
-        ),
-        const SizedBox(height: 32),
-        WeddingProgramStepper(),
-      ],
+    return ScrollFade(
+      controller: _scrollController,
+      start: 400,
+      end: 500,
+      child: Text(
+        'ថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩\nត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច នៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
+        style: AppStyles.bodyText1(
+          context,
+        ).copyWith(color: Colors.amber[700], fontFamily: 'KantumruyPro'),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 
@@ -244,7 +265,7 @@ class _WeddingPageState extends State<WeddingPage> {
     // Responsive padding
     final horizontalPadding = ResponsiveValue<double>(
       context,
-      defaultValue: 24.0,
+      defaultValue: 18.0,
       conditionalValues: [Condition.largerThan(breakpoint: 1024, value: 120.0)],
     ).value;
 
@@ -269,20 +290,33 @@ class _WeddingPageState extends State<WeddingPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: verticalSpacing * 3),
+            SizedBox(height: verticalSpacing * 4),
             _buildInvitationHeader(),
             SizedBox(height: verticalSpacing),
-            ParentSectionWidget(),
+            ParentSectionWidget(scrollController: _scrollController),
             SizedBox(height: verticalSpacing),
-            InvitationMessage(),
+            InvitationMessage(scrollController: _scrollController),
             SizedBox(height: verticalSpacing),
-            BrideAndGroomSection(),
+            BrideAndGroomSection(scrollController: _scrollController),
+
             SizedBox(height: verticalSpacing),
             _buildEventTimeAndLocation(),
+            SizedBox(height: verticalSpacing * 4),
+            _buildScrollHint(verticalSpacing),
+
+            SizedBox(height: verticalSpacing * 5),
+            ScrollPullReveal(
+              controller: _scrollController,
+              start: 100,
+              end: 250,
+              child: EnglishInvitation(scrollController: _scrollController),
+            ),
+            SizedBox(height: verticalSpacing * 5),
+            CountdownTimer(
+              targetDate: DateTime(2026, 3, 7, 7, 0), // adjust time if needed
+            ),
             SizedBox(height: verticalSpacing * 2),
-            EnglishInvitation(),
-            SizedBox(height: verticalSpacing * 2),
-            _buildFooterSection(),
+            WeddingProgramStepper(),
             SizedBox(height: verticalSpacing * 2),
             LocationSection(),
             SizedBox(height: verticalSpacing * 2),
@@ -295,12 +329,52 @@ class _WeddingPageState extends State<WeddingPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            // SizedBox(height: verticalSpacing * 2),
-            // MasonryGridExample(),
+            SizedBox(height: verticalSpacing * 2),
+            MasonryGridExample(),
             SizedBox(height: verticalSpacing * 3),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildScrollHint(double verticalSpacing) {
+    double startFade = 100;
+    double endFade = 250;
+
+    double opacity;
+
+    if (_scrollOffset <= startFade) {
+      opacity = 1;
+    } else if (_scrollOffset >= endFade) {
+      opacity = 0;
+    } else {
+      double progress = (_scrollOffset - startFade) / (endFade - startFade);
+      opacity = 1 - progress;
+    }
+
+    return Opacity(
+      opacity: opacity.clamp(0.0, 1.0),
+      child:
+          Column(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.anglesUp,
+                    color: Colors.amber[700],
+                    size: 20,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'អូសឡើងលើ',
+                    style: AppStyles.bodyText1(context).copyWith(
+                      color: Colors.amber[700],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              )
+              .animate(onPlay: (controller) => controller.repeat())
+              .shakeY(duration: Duration(seconds: 4), hz: 0.6),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CountdownTimer extends StatefulWidget {
@@ -48,46 +49,66 @@ class _CountdownTimerState extends State<CountdownTimer> {
     final seconds = _remaining.inSeconds % 60;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
+        Text(
           "ចំនួនថ្ងៃរាប់ថយក្រោយ",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: AppStyles.heading2(
+            context,
+          ).copyWith(color: Colors.amber[700], fontWeight: FontWeight.bold),
         ),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
           children: [
-            _timeBox(days, "ថ្ងៃ"),
-            _colon(),
-            _timeBox(hours, "ម៉ោង"),
-            _colon(),
-            _timeBox(minutes, "នាទី"),
-            _colon(),
-            _timeBox(seconds, "វិនាទី"),
+            _timeBox(context, days, "ថ្ងៃ"),
+            _colon(context),
+            _timeBox(context, hours, "ម៉ោង"),
+            _colon(context),
+            _timeBox(context, minutes, "នាទី"),
+            _colon(context),
+            _timeBox(context, seconds, "វិនាទី"),
           ],
         ),
       ],
     );
   }
 
-  Widget _colon() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6),
+  Widget _colon(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
       child: Text(
         ":",
-        style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+        style: AppStyles.heading1(context).copyWith(
+          // fontSize: 28,
+          color: Colors.amber[700],
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
 
-  Widget _timeBox(int value, String label) {
+  Widget _timeBox(BuildContext context, int value, String label) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           value.toString().padLeft(2, '0'),
-          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          style: AppStyles.heading1(context).copyWith(
+            color: Colors.amber[700],
+            // fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(fontSize: 12, color: Colors.red)),
+        Text(
+          label,
+          style: AppStyles.bodyText(
+            context,
+          ).copyWith(color: Colors.amber[700], fontWeight: FontWeight.w400),
+        ),
       ],
     );
   }
