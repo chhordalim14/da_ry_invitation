@@ -28,7 +28,7 @@ class LocationSection extends StatelessWidget {
             border: Border.all(color: Colors.amber[700]!, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Image.asset('assets/qr_code.png', fit: BoxFit.contain),
+          child: Image.asset('assets/qr_location.png', fit: BoxFit.contain),
         ),
         const SizedBox(height: 30),
         GestureDetector(

@@ -3,6 +3,7 @@ import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
+import 'package:da_ry_invitation/widget/audio_player_widget.dart';
 import 'package:da_ry_invitation/widget/bride_groom_section_widget.dart';
 import 'package:da_ry_invitation/widget/english_invitaion_widget.dart';
 import 'package:da_ry_invitation/widget/grid_view.dart';
@@ -112,11 +113,7 @@ class _WeddingPageState extends State<WeddingPage> {
           Positioned(
             bottom: 40,
             right: 10,
-            child: Icon(
-              FontAwesomeIcons.play,
-              color: Colors.amber.shade700,
-              size: 25,
-            ),
+            child: AudioPlayerButton()
           ),
         ],
       ),

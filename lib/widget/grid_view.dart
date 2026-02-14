@@ -5,7 +5,13 @@ class MasonryGridExample extends StatelessWidget {
   const MasonryGridExample({super.key});
 
   final List<String> weddingImagePaths = const [
-    'https://nextcloud.sabay.com/index.php/core/preview?fileId=7402343&x=1920&y=1080&a=true',
+    'assets/1.png',
+    'assets/2.png',
+    'assets/3.png',
+    'assets/4.png',
+    'assets/5.png',
+    'assets/6.png',
+    'assets/7.png',
   ];
 
   @override
@@ -72,12 +78,13 @@ class MasonryGridExample extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            imagePath,
-            fit: BoxFit.cover,
+          child: Image.asset(
+           imagePath,
+            fit: BoxFit.contain,
+
             // filterQuality: FilterQuality.high,
             width: width,
-            webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
+            // webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
           ),
         ),
       ),
