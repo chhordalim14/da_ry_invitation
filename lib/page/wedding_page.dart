@@ -41,14 +41,14 @@ class _WeddingPageState extends State<WeddingPage> {
         });
       });
     // // Initialize video controller
-    // _controller = VideoPlayerController.asset('assets/gif_background.MOV')
-    //   ..initialize().then((_) {
-    //     setState(() {});
-    //     _controller
-    //       ..setVolume(0)
-    //       ..setLooping(true)
-    //       ..play();
-    //   });
+    _controller = VideoPlayerController.asset('assets/IMG_1526.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+        _controller
+          ..setVolume(0)
+          ..setLooping(true)
+          ..play();
+      });
   }
 
   @override
@@ -85,22 +85,19 @@ class _WeddingPageState extends State<WeddingPage> {
         fit: StackFit.expand,
         children: [
           /// Video background
-          // if (_controller.value.isInitialized)
-          //   ImageFiltered(
-          //     imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          //     child: FittedBox(
-          //       fit: BoxFit.cover,
-          //       child: SizedBox(
-          //         width: _controller.value.size.width,
-          //         height: _controller.value.size.height,
-          //         child: VideoPlayer(_controller),
-          //       ),
-          //     ),
-          //   ),
-
+          if (_controller.value.isInitialized)
+            FittedBox(
+              fit: BoxFit.fill,
+              child: SizedBox(
+                width: _controller.value.size.width,
+                height: _controller.value.size.height,
+                child: VideoPlayer(_controller),
+              ),
+            ),
+          // FittedBox(fit: BoxFit.cover, child: VideoPlayer(_controller)),
           // /// Dark overlay for text visibility
           // Container(color: Colors.black.withValues(alpha: 0.25)),
-          Image.asset('assets/wedding_bg.jpg', fit: BoxFit.cover),
+          // Image.asset('assets/2dba3765c761716c018552c5351cff9d.jpg', fit: BoxFit.cover),
 
           /// Main content
           Center(
@@ -225,13 +222,17 @@ class _WeddingPageState extends State<WeddingPage> {
                     size: 20,
                     color: Colors.white,
                   ),
-                  const SizedBox(width: 15),
-                  Text(
-                    'សូមចុចបើកធៀប',
-                    style: AppStyles.bodyText1(context).copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Moulpali',
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      'សូមចុចបើកធៀប',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppStyles.bodyText1(context).copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Moulpali',
+                      ),
                     ),
                   ),
                 ],
