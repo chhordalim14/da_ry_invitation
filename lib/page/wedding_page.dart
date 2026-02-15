@@ -79,6 +79,7 @@ class _WeddingPageState extends State<WeddingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -110,11 +111,7 @@ class _WeddingPageState extends State<WeddingPage> {
                   : _buildMainContent(context),
             ),
           ),
-          Positioned(
-            bottom: 40,
-            right: 10,
-            child: AudioPlayerButton()
-          ),
+          Positioned(bottom: 40, right: 10, child: AudioPlayerButton()),
         ],
       ),
     );
@@ -127,100 +124,122 @@ class _WeddingPageState extends State<WeddingPage> {
       defaultValue: MediaQuery.of(context).size.width * 0.85,
       conditionalValues: [
         Condition.largerThan(
-          breakpoint: 600,
+          name: MOBILE,
           value: MediaQuery.of(context).size.width * 0.6,
         ),
         Condition.largerThan(
-          breakpoint: 1024,
+          name: TABLET,
           value: MediaQuery.of(context).size.width * 0.4,
         ),
       ],
     ).value;
 
-    return Column(
-      key: const ValueKey(1),
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Frosted Glass Container
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                'សិរីមង្គលអាពាហ៏ពិពាហ៍',
-                style: AppStyles.heading2(context).copyWith(
-                  color: Color.fromARGB(255, 208, 154, 16),
-                  // fontSize: 18,
-                  fontWeight: FontWeight.bold,
+    return Container(
+      // color: Colors.red,
+      height: containerWidth * 1.2,
+      child: Column(
+        key: const ValueKey(1),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'សិរីមង្គលអាពាហ៏ពិពាហ៍',
+            style: AppStyles.heading1(context).copyWith(
+              color: Colors.amber[700],
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Moulpali',
+            ),
+            // textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: containerWidth * 0.4,
+            child: Image.asset(
+              'assets/wedding_frame_name.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+          Text(
+            'សូមគោរពអញ្ជើញ',
+            style: AppStyles.heading2(context).copyWith(
+              color: Colors.amber[700],
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Moulpali',
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            width: containerWidth * 0.5,
+            height: containerWidth * 0.2,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  'assets/name_box.png',
+                  fit: BoxFit.fill,
+                  color: Colors.amber[700],
                 ),
-                // textAlign: TextAlign.center,
-              ),
-              Text(
-                'ឆដា & ធារី',
-                style: AppStyles.heading1(
-                  context,
-                ).copyWith(color: Color.fromARGB(255, 208, 154, 16)),
-                // textAlign: TextAlign.center,
-              ),
-              Text(
-                'សូមគោរពអញ្ជើញ',
-                style: AppStyles.bodyText(context).copyWith(color: colorsApp),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                width: containerWidth * 0.8,
-                height: containerWidth * 0.2,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset('assets/name_box.png', fit: BoxFit.fill),
-                    Text("Lim Chhorda", style: AppStyles.bodyText(context)),
-                  ],
-                ),
-              ),
-
-              /// Liquid Glass Button
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _showDetail = true;
-                  });
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: Container(
-                      width: 180,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.18),
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.4),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            FontAwesomeIcons.envelopeOpen,
-                            size: 16,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(width: 10),
-                          Text('បើកធៀប', style: AppStyles.buttonText(context)),
-                        ],
-                      ),
-                    ),
+                Text(
+                  "ភ្ញៀវកិត្តិយស",
+                  style: AppStyles.bodyText1(context).copyWith(
+                    color: Colors.amber[700],
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Moulpali',
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+
+          /// Liquid Glass Button
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _showDetail = true;
+              });
+            },
+            child: Container(
+              width: containerWidth / 2,
+              height: containerWidth / 9,
+              decoration: BoxDecoration(
+                color: Colors.amber[700],
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade500,
+                    blurRadius: 8,
+                    spreadRadius: 1,
+                    offset: const Offset(4, 4),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    blurRadius: 8,
+                    spreadRadius: 1,
+                    offset: const Offset(-4, -4),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    FontAwesomeIcons.envelopeOpen,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(width: 15),
+                  Text(
+                    'សូមចុចបើកធៀប',
+                    style: AppStyles.bodyText1(context).copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Moulpali',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -229,11 +248,27 @@ class _WeddingPageState extends State<WeddingPage> {
   Widget _buildInvitationHeader() {
     return ScrollFade(
       controller: _scrollController,
-      start: 0,
-      end: 100,
+      start: ResponsiveValue<double>(
+        context,
+        defaultValue: 0,
+        conditionalValues: [
+          Condition.equals(name: MOBILE, value: 0),
+          Condition.equals(name: TABLET, value: 100),
+          Condition.equals(name: DESKTOP, value: 130),
+        ],
+      ).value,
+      end: ResponsiveValue<double>(
+        context,
+        defaultValue: 100,
+        conditionalValues: [
+          Condition.equals(name: MOBILE, value: 100),
+          Condition.equals(name: TABLET, value: 100),
+          Condition.equals(name: DESKTOP, value: 230),
+        ],
+      ).value,
       child: Text(
         'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
-        style: AppStyles.heading1(context).copyWith(
+        style: AppStyles.heading2(context).copyWith(
           color: Colors.amber[700],
           fontWeight: FontWeight.bold,
           fontFamily: 'Moulpali',
@@ -259,19 +294,29 @@ class _WeddingPageState extends State<WeddingPage> {
   }
 
   Widget _buildDetailContent(BuildContext context) {
-    // Responsive padding
-    final horizontalPadding = ResponsiveValue<double>(
-      context,
-      defaultValue: 18.0,
-      conditionalValues: [Condition.largerThan(breakpoint: 1024, value: 120.0)],
-    ).value;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
+
+    // 👉 Width control
+    double contentWidth = screenWidth;
+
+    if (isDesktop) {
+      contentWidth = screenWidth * 0.5; // 60% on desktop
+    } else if (isTablet) {
+      contentWidth = screenWidth * 0.85; // optional tablet control
+    } else {
+      contentWidth = screenWidth; // full width on mobile
+    }
 
     final verticalSpacing = ResponsiveValue<double>(
       context,
-      defaultValue: 24.0,
+      defaultValue: 18,
       conditionalValues: [
-        Condition.largerThan(breakpoint: 600, value: 32.0),
-        Condition.largerThan(breakpoint: 1024, value: 40.0),
+        Condition.equals(name: MOBILE, value: 18.0),
+        Condition.equals(name: TABLET, value: 24.0),
+        Condition.equals(name: DESKTOP, value: 28.0),
       ],
     ).value;
 
@@ -280,56 +325,68 @@ class _WeddingPageState extends State<WeddingPage> {
         controller: _scrollController,
         key: const ValueKey(2),
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding,
-          vertical: verticalSpacing,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: verticalSpacing * 4),
-            _buildInvitationHeader(),
-            SizedBox(height: verticalSpacing),
-            ParentSectionWidget(scrollController: _scrollController),
-            SizedBox(height: verticalSpacing),
-            InvitationMessage(scrollController: _scrollController),
-            SizedBox(height: verticalSpacing),
-            BrideAndGroomSection(scrollController: _scrollController),
-
-            SizedBox(height: verticalSpacing),
-            _buildEventTimeAndLocation(),
-            SizedBox(height: verticalSpacing * 4),
-            _buildScrollHint(verticalSpacing),
-
-            SizedBox(height: verticalSpacing * 5),
-            ScrollPullReveal(
-              controller: _scrollController,
-              start: 100,
-              end: 250,
-              child: EnglishInvitation(scrollController: _scrollController),
+        child: Center(
+          // 👈 important
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: contentWidth, // 👈 responsive width here
             ),
-            SizedBox(height: verticalSpacing * 5),
-            CountdownTimer(
-              targetDate: DateTime(2026, 3, 7, 7, 0), // adjust time if needed
-            ),
-            SizedBox(height: verticalSpacing * 2),
-            WeddingProgramStepper(),
-            SizedBox(height: verticalSpacing * 2),
-            LocationSection(),
-            SizedBox(height: verticalSpacing * 2),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 18,
+                vertical: verticalSpacing,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: verticalSpacing * 4),
+                  _buildInvitationHeader(),
+                  SizedBox(height: verticalSpacing),
+                  ParentSectionWidget(scrollController: _scrollController),
+                  SizedBox(height: verticalSpacing),
+                  InvitationMessage(scrollController: _scrollController),
+                  SizedBox(height: verticalSpacing),
+                  BrideAndGroomSection(scrollController: _scrollController),
+                  SizedBox(height: verticalSpacing),
+                  _buildEventTimeAndLocation(),
+                  SizedBox(height: verticalSpacing * 4),
+                  _buildScrollHint(verticalSpacing),
 
-            Text(
-              'វិចិត្រសាល',
-              style: AppStyles.heading2(context).copyWith(
-                color: Colors.amber[700],
-                // fontSize: 18,
-                fontWeight: FontWeight.bold,
+                  SizedBox(height: verticalSpacing * 5),
+                  ScrollPullReveal(
+                    controller: _scrollController,
+                    start: 100,
+                    end: 250,
+                    child: EnglishInvitation(
+                      scrollController: _scrollController,
+                    ),
+                  ),
+
+                  SizedBox(height: verticalSpacing * 2),
+                  WeddingProgramStepper(),
+
+                  SizedBox(height: verticalSpacing * 2),
+                  LocationSection(),
+
+                  SizedBox(height: verticalSpacing * 2),
+                  Text(
+                    'វិចិត្រសាល',
+                    style: AppStyles.heading2(context).copyWith(
+                      color: Colors.amber[700],
+                      // fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Moulpali',
+                    ),
+                  ),
+
+                  SizedBox(height: verticalSpacing * 2),
+                  MasonryGridExample(),
+                  SizedBox(height: verticalSpacing * 3),
+                ],
               ),
             ),
-            SizedBox(height: verticalSpacing * 2),
-            MasonryGridExample(),
-            SizedBox(height: verticalSpacing * 3),
-          ],
+          ),
         ),
       ),
     );
@@ -360,7 +417,7 @@ class _WeddingPageState extends State<WeddingPage> {
                     color: Colors.amber[700],
                     size: 20,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                   Text(
                     'អូសឡើងលើ',
                     style: AppStyles.bodyText1(context).copyWith(

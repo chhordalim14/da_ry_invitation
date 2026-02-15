@@ -17,7 +17,7 @@ class DateDivider extends StatelessWidget {
         children: [
           // const SizedBox(height: 10),
           SizedBox(
-            height: 60,
+            height: MediaQuery.sizeOf(context).height * 0.06,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -35,7 +35,7 @@ class DateDivider extends StatelessWidget {
                           color: Colors.amber[700],
                         ),
                       ),
-                      SizedBox(width: 50),
+                      SizedBox(width: MediaQuery.sizeOf(context).height * 0.05),
                       Expanded(
                         child: Divider(
                           endIndent: 80,
@@ -60,7 +60,7 @@ class DateDivider extends StatelessWidget {
                         fontFamily: 'IMFellEnglishSC',
                       ),
                     ),
-                    SizedBox(width: 22),
+                    SizedBox(width: MediaQuery.sizeOf(context).height * 0.02),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -84,7 +84,7 @@ class DateDivider extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 22),
+                    SizedBox(width: MediaQuery.sizeOf(context).height * 0.02),
                     Text(
                       'MARCH',
                       style: AppStyles.bodyText(context).copyWith(
@@ -111,7 +111,7 @@ class DateDivider extends StatelessWidget {
                           color: Colors.amber[700],
                         ),
                       ),
-                      SizedBox(width: 50),
+                      SizedBox(width: MediaQuery.sizeOf(context).height * 0.05),
                       Expanded(
                         child: Divider(
                           endIndent: 80,

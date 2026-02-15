@@ -5,7 +5,10 @@ class MasonryGridExample extends StatelessWidget {
   const MasonryGridExample({super.key});
 
   final List<String> weddingImagePaths = const [
+    'assets/test12.webp',
+    'assets/test13.webp',
     'assets/1.png',
+    'assets/1_1.png',
     'assets/2.png',
     'assets/3.png',
     'assets/4.png',
@@ -79,7 +82,7 @@ class MasonryGridExample extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Image.asset(
-           imagePath,
+            imagePath,
             fit: BoxFit.contain,
 
             // filterQuality: FilterQuality.high,

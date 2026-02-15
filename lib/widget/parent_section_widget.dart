@@ -8,13 +8,6 @@ class ParentSectionWidget extends StatelessWidget {
   final ScrollController scrollController;
   @override
   Widget build(BuildContext context) {
-    final normalTextStyle = AppStyles.bodyText(context).copyWith(
-      color: Colors.amber[700],
-      // fontSize: 18,
-      fontWeight: FontWeight.bold,
-
-      // fontFamily: 'Moulpali',
-    );
     final textStyle = AppStyles.bodyText(context).copyWith(
       color: Colors.amber[700],
       // fontSize: 18,
@@ -33,10 +26,10 @@ class ParentSectionWidget extends StatelessWidget {
         ],
       ).value,
 
-      rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
-      rowCrossAxisAlignment: CrossAxisAlignment.center,
-      columnCrossAxisAlignment: CrossAxisAlignment.center,
+      rowMainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
+      // rowCrossAxisAlignment: CrossAxisAlignment.center,
+      // columnCrossAxisAlignment: CrossAxisAlignment.center,
       columnSpacing: 16,
       children: [
         ResponsiveRowColumnItem(
@@ -49,7 +42,7 @@ class ParentSectionWidget extends StatelessWidget {
                 end: 150,
                 child: Text('លោក លីម វាំងធី', style: textStyle),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: MediaQuery.sizeOf(context).width * 0.01),
               ScrollFade(
                 controller: scrollController,
                 start: 100,
@@ -69,7 +62,7 @@ class ParentSectionWidget extends StatelessWidget {
                 end: 150,
                 child: Text('លោក ហុក យ៉ុន', style: textStyle),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: MediaQuery.sizeOf(context).width * 0.01),
               ScrollFade(
                 controller: scrollController,
                 start: 100,

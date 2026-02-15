@@ -20,12 +20,12 @@ class BrideAndGroomSection extends StatelessWidget {
         ],
       ).value,
 
-      rowMainAxisAlignment: MainAxisAlignment.spaceAround,
-      rowVerticalDirection: VerticalDirection.down,
-      rowCrossAxisAlignment: CrossAxisAlignment.center,
-      columnCrossAxisAlignment: CrossAxisAlignment.center,
+      rowMainAxisAlignment: MainAxisAlignment.center,
+      // rowVerticalDirection: VerticalDirection.down,
+      // rowCrossAxisAlignment: CrossAxisAlignment.center,
+      // columnCrossAxisAlignment: CrossAxisAlignment.center,
 
-      columnSpacing: 24,
+      // columnSpacing: MediaQuery.sizeOf(context).height * 0.02,
       children: [
         ResponsiveRowColumnItem(
           child: Column(
@@ -44,7 +44,7 @@ class BrideAndGroomSection extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
               ScrollFade(
                 controller: scrollController,
                 start: 350,
@@ -68,10 +68,10 @@ class BrideAndGroomSection extends StatelessWidget {
             start: 320,
             end: 420,
             child: SizedBox(
-              height: 100,
-              width: 100,
+              height: MediaQuery.sizeOf(context).height * 0.12,
+              width: MediaQuery.sizeOf(context).height * 0.12,
               child: Image.asset(
-                'assets/wedding_name.png',
+                'assets/wedding_frame_name.png',
                 fit: BoxFit.contain,
               ),
             ),
@@ -94,7 +94,7 @@ class BrideAndGroomSection extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
               ScrollFade(
                 controller: scrollController,
                 start: 350,

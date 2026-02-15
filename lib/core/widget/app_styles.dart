@@ -7,10 +7,20 @@ class AppStyles {
       color: Colors.white,
       fontSize: ResponsiveValue<double>(
         context,
-        defaultValue: 28.0,
+        defaultValue: MediaQuery.sizeOf(context).height * 0.024,
         conditionalValues: [
-          Condition.largerThan(name: TABLET, value: 36.0),
-          Condition.largerThan(name: DESKTOP, value: 48.0),
+          Condition.equals(
+            name: MOBILE,
+            value: MediaQuery.sizeOf(context).height * 0.024,
+          ),
+          Condition.equals(
+            name: TABLET,
+            value: MediaQuery.sizeOf(context).height * 0.028,
+          ),
+          Condition.equals(
+            name: DESKTOP,
+            value: MediaQuery.sizeOf(context).height * 0.032,
+          ),
         ],
       ).value,
       fontWeight: FontWeight.bold,
@@ -22,10 +32,20 @@ class AppStyles {
       color: Colors.white,
       fontSize: ResponsiveValue<double>(
         context,
-        defaultValue: 22.0,
+        defaultValue: MediaQuery.sizeOf(context).height * 0.020,
         conditionalValues: [
-          Condition.largerThan(name: TABLET, value: 26.0),
-          Condition.largerThan(name: DESKTOP, value: 32.0),
+          Condition.equals(
+            name: MOBILE,
+            value: MediaQuery.sizeOf(context).height * 0.020,
+          ),
+          Condition.equals(
+            name: TABLET,
+            value: MediaQuery.sizeOf(context).height * 0.022,
+          ),
+          Condition.equals(
+            name: DESKTOP,
+            value: MediaQuery.sizeOf(context).height * 0.024,
+          ),
         ],
       ).value,
       fontWeight: FontWeight.bold,
@@ -38,10 +58,11 @@ class AppStyles {
       height: 1.5, // Improved line spacing for readability
       fontSize: ResponsiveValue<double>(
         context,
-        defaultValue: 16.0,
+        defaultValue: 14,
         conditionalValues: [
-          Condition.largerThan(name: TABLET, value: 18.0),
-          Condition.largerThan(name: DESKTOP, value: 20.0),
+          Condition.equals(name: MOBILE, value: 14),
+          Condition.equals(name: TABLET, value: 16),
+          Condition.equals(name: DESKTOP, value: 18),
         ],
       ).value,
       fontWeight: FontWeight.w500, // Medium weight for body text
@@ -54,10 +75,11 @@ class AppStyles {
       height: 1.5, // Improved line spacing for readability
       fontSize: ResponsiveValue<double>(
         context,
-        defaultValue: 18.0,
+        defaultValue: 16.0,
         conditionalValues: [
-          Condition.largerThan(name: TABLET, value: 20.0),
-          Condition.largerThan(name: DESKTOP, value: 22.0),
+          Condition.equals(name: MOBILE, value: 16),
+          Condition.equals(name: TABLET, value: 18),
+          Condition.equals(name: DESKTOP, value: 20),
         ],
       ).value,
       fontWeight: FontWeight.w400, // Medium weight for body text

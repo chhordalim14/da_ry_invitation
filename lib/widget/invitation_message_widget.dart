@@ -26,7 +26,7 @@ class InvitationMessage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
         ScrollFade(
           controller: scrollController,
           start: 200,
@@ -35,7 +35,7 @@ class InvitationMessage extends StatelessWidget {
             'ឯកឧត្តម លោកអ្នកឧកញ៉ា អ្នកឧកញ៉ា លោកជំទាវ លោក លោកស្រី អ្នកនាង កញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធិពរជ័យសិរីសួស្តី ជ័យមង្គល ក្នុងពិធីអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រីរបស់យើងខ្ញុំ',
             style: AppStyles.bodyText1(
               context,
-            ).copyWith(color: Colors.amber[700]),
+            ).copyWith(color: Colors.amber[700], fontFamily: 'KantumruyPro'),
             textAlign: TextAlign.center,
           ),
         ),

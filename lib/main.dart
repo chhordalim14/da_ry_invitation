@@ -13,9 +13,7 @@ class WeddingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // fontFamily: 'Preahvihear', // <-- use your font here
-      ),
+      
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
         breakpoints: const [

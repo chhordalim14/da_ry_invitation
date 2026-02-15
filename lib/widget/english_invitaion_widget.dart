@@ -1,5 +1,5 @@
-import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
+import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/widget/date_divider_widget.dart';
 import 'package:da_ry_invitation/widget/scroll_fade.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +12,10 @@ class EnglishInvitation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final parentsTextStyle = AppStyles.bodyText(context).copyWith(
+    final parentsTextStyle = AppStyles.heading2(context).copyWith(
       color: Colors.amber[700],
-      // fontSize: 18,
       fontWeight: FontWeight.bold,
-
-      // fontFamily: 'Playball',
+      fontFamily: 'IMFellEnglishSC',
     );
 
     return Column(
@@ -27,13 +25,16 @@ class EnglishInvitation extends StatelessWidget {
           start: 850,
           end: 950,
           child: SizedBox(
-            height: 100,
+            height: MediaQuery.sizeOf(context).height * 0.17,
             // width: 150,
-            child: Image.asset('assets/wedding_name.png', fit: BoxFit.contain),
+            child: Image.asset(
+              'assets/wedding_frame_name.png',
+              fit: BoxFit.contain,
+            ),
           ),
         ),
         // SizedBox(height: 30, child: Image.asset('assets/decor-line.png')),
-        const SizedBox(height: 24),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
         ResponsiveRowColumn(
           layout: ResponsiveValue<ResponsiveRowColumnType>(
             context,
@@ -76,7 +77,14 @@ class EnglishInvitation extends StatelessWidget {
                 controller: scrollController,
                 start: 1020,
                 end: 1120,
-                child: Text('alongside', style: parentsTextStyle),
+                child: Text(
+                  'alongside',
+                  style: AppStyles.bodyText1(context).copyWith(
+                    color: Colors.amber[700],
+                    // fontWeight: FontWeight.w400,
+                    fontFamily: 'kantumruyPro',
+                  ),
+                ),
               ),
             ),
             ResponsiveRowColumnItem(
@@ -100,7 +108,7 @@ class EnglishInvitation extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
         ScrollFade(
           controller: scrollController,
           start: 1100,
@@ -109,11 +117,11 @@ class EnglishInvitation extends StatelessWidget {
             'Cordially request the honor of your presence on the auspicious occasion of the wedding of our children',
             style: AppStyles.bodyText1(
               context,
-            ).copyWith(color: Colors.amber[700]),
+            ).copyWith(color: Colors.amber[700], fontFamily: 'KantumruyPro'),
             textAlign: TextAlign.center,
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
         ResponsiveRowColumn(
           layout: ResponsiveValue<ResponsiveRowColumnType>(
             context,
@@ -141,7 +149,7 @@ class EnglishInvitation extends StatelessWidget {
                       style: AppStyles.bodyText(context).copyWith(
                         color: Colors.amber[700],
                         fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                         fontFamily: 'IMFellEnglishSC',
                       ),
                     ),
@@ -165,7 +173,9 @@ class EnglishInvitation extends StatelessWidget {
             ),
             ResponsiveRowColumnItem(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.sizeOf(context).width * 0.03,
+                ),
                 child: ScrollFade(
                   controller: scrollController,
                   start: 1220,
@@ -175,6 +185,7 @@ class EnglishInvitation extends StatelessWidget {
                     style: AppStyles.heading2(context).copyWith(
                       color: Colors.amber[700],
                       fontFamily: 'IMFellEnglishSC',
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
@@ -192,7 +203,7 @@ class EnglishInvitation extends StatelessWidget {
                       style: AppStyles.bodyText(context).copyWith(
                         color: Colors.amber[700],
                         fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                         fontFamily: 'IMFellEnglishSC',
                       ),
                     ),
@@ -203,7 +214,7 @@ class EnglishInvitation extends StatelessWidget {
                     end: 1330,
                     child: Text(
                       'Yi Sotheary',
-                      style: AppStyles.heading2(context).copyWith(
+                      style: AppStyles.heading1(context).copyWith(
                         color: Colors.amber[700],
                         // fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -216,21 +227,25 @@ class EnglishInvitation extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 32),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
         DateDivider(scrollController: scrollController),
-        const SizedBox(height: 32),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
         ScrollFade(
           controller: scrollController,
           start: 1390,
           end: 1490,
           child: Text(
-            'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU!',
-            style: AppStyles.bodyText1(
-              context,
-            ).copyWith(color: Colors.amber[700], fontWeight: FontWeight.w500),
+            'AT CAMBODIAN RED CROSS KANDAL. BRANCH\n(PLEASE SEE THE MAP)\nTHANK YOU !',
+            style: AppStyles.bodyText1(context).copyWith(
+              color: Colors.amber[700],
+              fontFamily: 'IMFellEnglishSC',
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.03),
+        CountdownTimer(targetDate: DateTime(2026, 3, 7, 7, 0)),
       ],
     );
   }
