@@ -1,3 +1,4 @@
+import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/audio_player_widget.dart';
@@ -16,7 +17,8 @@ import 'package:video_player/video_player.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeddingPage extends StatefulWidget {
-  const WeddingPage({super.key});
+  const WeddingPage({super.key, this.guestName});
+  final String? guestName;
 
   @override
   State<WeddingPage> createState() => _WeddingPageState();
@@ -38,7 +40,7 @@ class _WeddingPageState extends State<WeddingPage> {
         });
       });
     // // Initialize video controller
-    _controller = VideoPlayerController.asset('assets/IMG_1526.mp4')
+    _controller = VideoPlayerController.asset('assets/wedding_bg_video.mp4')
       ..initialize().then((_) {
         setState(() {});
         _controller
@@ -160,6 +162,7 @@ class _WeddingPageState extends State<WeddingPage> {
             ),
             textAlign: TextAlign.center,
           ),
+
           SizedBox(
             width: containerWidth * 0.5,
             height: containerWidth * 0.2,
@@ -172,7 +175,8 @@ class _WeddingPageState extends State<WeddingPage> {
                   color: Colors.amber[700],
                 ),
                 Text(
-                  "ភ្ញៀវកិត្តិយស",
+                  widget.guestName?.capitalize() ?? 'ភ្ញៀវកិត្តិយស',
+                  textAlign: TextAlign.center,
                   style: AppStyles.bodyText1(context).copyWith(
                     color: Colors.amber[700],
                     fontWeight: FontWeight.bold,
@@ -185,57 +189,64 @@ class _WeddingPageState extends State<WeddingPage> {
 
           /// Liquid Glass Button
           GestureDetector(
-            onTap: () {
-              setState(() {
-                _showDetail = true;
-              });
-            },
-            child: Container(
-              width: containerWidth / 2,
-              height: containerWidth / 9,
-              decoration: BoxDecoration(
-                color: Colors.amber[700],
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade500,
-                    blurRadius: 8,
-                    spreadRadius: 1,
-                    offset: const Offset(4, 4),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    blurRadius: 8,
-                    spreadRadius: 1,
-                    offset: const Offset(-4, -4),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    FontAwesomeIcons.envelopeOpen,
-                    size: 20,
-                    color: Colors.white,
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: Text(
-                      'សូមចុចបើកធៀប',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppStyles.bodyText1(context).copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Moulpali',
+                onTap: () {
+                  setState(() {
+                    _showDetail = true;
+                  });
+                },
+                child: Container(
+                  width: MediaQuery.sizeOf(context).height * 0.25,
+                  height: MediaQuery.sizeOf(context).height * 0.05,
+                  decoration: BoxDecoration(
+                    color: Colors.amber[700],
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade500,
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                        offset: const Offset(4, 4),
                       ),
-                    ),
+                      BoxShadow(
+                        color: Colors.white,
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                        offset: const Offset(-4, -4),
+                      ),
+                    ],
                   ),
-                ],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.envelopeOpen,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          'សូមចុចបើកធៀប',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppStyles.bodyText1(context).copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Moulpali',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              .animate(onPlay: (controller) => controller.repeat(reverse: true))
+              .scale(
+                begin: const Offset(1, 1),
+                end: const Offset(1.05, 1.05),
+                duration: 1.seconds,
+                curve: Curves.easeInOut,
               ),
-            ),
-          ),
         ],
       ),
     );
@@ -361,24 +372,14 @@ class _WeddingPageState extends State<WeddingPage> {
                     ),
                   ),
 
-                  SizedBox(height: verticalSpacing * 2),
+                  SizedBox(height: verticalSpacing * 4),
                   WeddingProgramStepper(),
 
-                  SizedBox(height: verticalSpacing * 2),
+                  SizedBox(height: verticalSpacing * 4),
                   LocationSection(),
 
-                  SizedBox(height: verticalSpacing * 2),
-                  Text(
-                    'វិចិត្រសាល',
-                    style: AppStyles.heading2(context).copyWith(
-                      color: Colors.amber[700],
-                      // fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Moulpali',
-                    ),
-                  ),
+                  SizedBox(height: verticalSpacing * 4),
 
-                  SizedBox(height: verticalSpacing * 2),
                   MasonryGridExample(),
                   SizedBox(height: verticalSpacing * 3),
                 ],

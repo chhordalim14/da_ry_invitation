@@ -29,23 +29,23 @@ class WeddingProgramStepper extends StatelessWidget {
       title: 'ពិធីជាវខាន់ស្លា',
       icon: 'assets/icons/icon_15.png',
     ),
-    EventStep(
-      time: 'ម៉ោង ០៥:០០ រសៀល',
-      title: 'ពិសាអាហារពេលល្ងាច',
-      icon: 'assets/icons/icon_17.png',
-    ),
+    // EventStep(
+    //   time: 'ម៉ោង ០៥:០០ រសៀល',
+    //   title: 'ពិសាអាហារពេលល្ងាច',
+    //   icon: 'assets/icons/icon_17.png',
+    // ),
   ];
 
   final List<EventStep> day2Events = [
     EventStep(
       time: 'ម៉ោង ០៦:៣០ ព្រឹក',
       title: 'ពិធីហែជំនួន',
-      icon: 'assets/icons/icon_17.png',
+      icon: 'assets/icons/icon_18.png',
     ),
     EventStep(
       time: 'ម៉ោង ០៧:០០ ព្រឹក',
       title: 'ពិធីចៅមហានិយាយជើងការ',
-      icon: 'assets/icons/icon_1.png',
+      icon: 'assets/icons/icon_6.png',
     ),
     EventStep(
       time: 'ម៉ោង ០៧:៣០ ព្រឹក',
@@ -65,7 +65,7 @@ class WeddingProgramStepper extends StatelessWidget {
     EventStep(
       time: 'ម៉ោង ១១:០០ ព្រឹក',
       title: 'ពិធីសំពះផ្ទឹបចង់ដៃ',
-      icon: 'assets/icons/icon_3.png',
+      icon: 'assets/icons/icon_19.png',
     ),
     // EventStep(
     //   time: 'ម៉ោង ១២:០០ ព្រឹក',
@@ -126,28 +126,23 @@ class WeddingProgramStepper extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
         Text(
           title,
           style: AppStyles.heading2(context).copyWith(
             color: Colors.amber[700],
             fontWeight: FontWeight.bold,
-            fontFamily: 'KantumruyPro',
+            fontFamily: 'IMFellEnglishSC',
           ),
           textAlign: TextAlign.center,
         ),
-        AnimatedSoftSCurveLine(
-          height: MediaQuery.sizeOf(context).height * 0.01,
-          width: MediaQuery.sizeOf(context).height * 0.25,
-          color: Colors.amber.shade700,
-        ),
+
         SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
 
         Wrap(
           alignment: WrapAlignment.center,
           spacing:
               MediaQuery.sizeOf(context).height *
-              0.02, // horizontal spacing between items
+              0.03, // horizontal spacing between items
           runSpacing:
               MediaQuery.sizeOf(context).height *
               0.02, // vertical spacing between lines
@@ -166,18 +161,20 @@ class WeddingProgramStepper extends StatelessWidget {
         children: [
           Text(
             'របៀបរារះកម្មវិធី / EVENT AGENDA',
-            style: AppStyles.heading1(context).copyWith(
+            style: AppStyles.heading2(context).copyWith(
               color: Colors.amber[700],
               // fontSize: 18,
               fontWeight: FontWeight.bold,
               fontFamily: 'Moulpali',
             ),
           ),
+          SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
           _daySection(
             "កម្មវិធីថ្ងៃទី១ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
             day1Events,
             context,
           ),
+          SizedBox(height: MediaQuery.sizeOf(context).height * 0.08),
           _daySection(
             "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៨ ខែមីនា ឆ្នាំ ២០២៦",
             day2Events,

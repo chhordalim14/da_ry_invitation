@@ -1,3 +1,4 @@
+import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:da_ry_invitation/page/full_screen_image_view.dart'; // Import the new full screen image view
 
@@ -5,16 +6,16 @@ class MasonryGridExample extends StatelessWidget {
   const MasonryGridExample({super.key});
 
   final List<String> weddingImagePaths = const [
-    'assets/test12.webp',
-    'assets/test13.webp',
-    'assets/1.png',
-    'assets/1_1.png',
-    'assets/2.png',
-    'assets/3.png',
-    'assets/4.png',
-    'assets/5.png',
-    'assets/6.png',
-    'assets/7.png',
+    'assets/wedding/wedding_image_1.jpg',
+    'assets/wedding/wedding_image_2.jpg',
+    'assets/wedding/wedding_image_3.jpg',
+    'assets/wedding/wedding_image_4.jpg',
+    'assets/wedding/wedding_image_5.jpg',
+    'assets/wedding/wedding_image_6.jpg',
+    'assets/wedding/wedding_image_7.jpg',
+    'assets/wedding/wedding_image_8.jpg',
+    'assets/wedding/wedding_image_9.jpg',
+    'assets/wedding/wedding_image_10.jpg',
   ];
 
   @override
@@ -45,20 +46,32 @@ class MasonryGridExample extends StatelessWidget {
           }
         }
 
-        return SingleChildScrollView(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: columnWidth,
-                child: Column(children: leftColumn),
+        return Column(
+          children: [
+            Text(
+              'វិចិត្រសាល / PHOTO GALLERY',
+              style: AppStyles.heading2(context).copyWith(
+                color: Colors.amber[700],
+                // fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Moulpali',
               ),
-              SizedBox(
-                width: columnWidth,
-                child: Column(children: rightColumn),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: MediaQuery.sizeOf(context).height * 0.04),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: columnWidth,
+                  child: Column(children: leftColumn),
+                ),
+                SizedBox(
+                  width: columnWidth,
+                  child: Column(children: rightColumn),
+                ),
+              ],
+            ),
+          ],
         );
       },
     );

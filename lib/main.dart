@@ -1,19 +1,37 @@
 import 'package:da_ry_invitation/page/wedding_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
   runApp(const WeddingApp());
 }
 
+// GoRouter configuration
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const WeddingPage(),
+    ),
+    GoRoute(
+      path: '/guest/:name',
+      builder: (context, state) {
+        final name = state.pathParameters['name'] ?? '';
+        return WeddingPage(guestName: name);
+      },
+    ),
+  ],
+);
+
 class WeddingApp extends StatelessWidget {
   const WeddingApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       debugShowCheckedModeBanner: false,
-      
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
         breakpoints: const [
@@ -22,7 +40,6 @@ class WeddingApp extends StatelessWidget {
           Breakpoint(start: 1025, end: double.infinity, name: DESKTOP),
         ],
       ),
-      home: const WeddingPage(),
     );
   }
 }
