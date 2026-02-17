@@ -1,5 +1,6 @@
 import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
+import 'package:da_ry_invitation/services/audio_player_service.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/audio_player_widget.dart';
 import 'package:da_ry_invitation/widget/bride_groom_section_widget.dart';
@@ -29,9 +30,11 @@ class _WeddingPageState extends State<WeddingPage> {
   bool _showDetail = false; // Toggle UI
   late ScrollController _scrollController;
   double _scrollOffset = 0;
+  final audioService = AudioPlayerService();
   @override
   void initState() {
     super.initState();
+
     // Listen to scroll
     _scrollController = ScrollController()
       ..addListener(() {
@@ -189,6 +192,7 @@ class _WeddingPageState extends State<WeddingPage> {
           /// Liquid Glass Button
           GestureDetector(
                 onTap: () {
+                  audioService.play();
                   setState(() {
                     _showDetail = true;
                   });

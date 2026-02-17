@@ -55,12 +55,15 @@ class _CountdownTimerState extends State<CountdownTimer> {
         // Background image
         ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(16),
-          child: Image.asset('assets/test12.webp', fit: BoxFit.cover),
+          child: Image.asset(
+            'assets/wedding/wedding_image_11.jpg',
+            fit: BoxFit.cover,
+          ),
         ),
 
         // Frosted backdrop + countdown
         Positioned(
-          bottom: MediaQuery.sizeOf(context).height * 0.1,
+          bottom: MediaQuery.sizeOf(context).height * 0.2,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(
               16,

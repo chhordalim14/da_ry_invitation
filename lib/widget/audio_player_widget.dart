@@ -1,6 +1,6 @@
 import 'package:da_ry_invitation/services/audio_player_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AudioPlayerButton extends StatefulWidget {
   const AudioPlayerButton({super.key});
@@ -11,20 +11,41 @@ class AudioPlayerButton extends StatefulWidget {
 
 class _AudioPlayerButtonState extends State<AudioPlayerButton> {
   final audioService = AudioPlayerService();
-  bool _isPlaying = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   audioService.init();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () async {
-        if (_isPlaying) {
-          await audioService.pause();
-        } else {
-          await audioService.play();
-        }
-        setState(() => _isPlaying = !_isPlaying);
+    return StreamBuilder<bool>(
+      stream: audioService.playingStream,
+      builder: (context, snapshot) {
+        final isPlaying = snapshot.data ?? false;
+        return Container(
+          height: MediaQuery.sizeOf(context).height * 0.04,
+          width: MediaQuery.sizeOf(context).height * 0.04,
+
+          alignment: Alignment.center,
+          child: FloatingActionButton(
+            backgroundColor: Colors.amber.shade700,
+            onPressed: () async {
+              if (isPlaying) {
+                await audioService.pause();
+              } else {
+                await audioService.play();
+              }
+            },
+            child: Icon(
+              size: 16,
+              color: Colors.white,
+              isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
+            ),
+          ),
+        );
       },
-      icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
     );
   }
 }

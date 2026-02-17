@@ -44,4 +44,5 @@ class AudioPlayerService {
 
   Future<void> pause() async => _player.pause();
   bool get isPlaying => _player.playing;
+  Stream<bool> get playingStream => _player.playingStream;
 }
