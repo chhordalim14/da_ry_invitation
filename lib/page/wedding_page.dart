@@ -130,7 +130,7 @@ class _WeddingPageState extends State<WeddingPage> {
       ],
     ).value;
 
-    return Container(
+    return SizedBox(
       // color: Colors.red,
       height: containerWidth * 1.2,
       child: Column(
@@ -164,8 +164,7 @@ class _WeddingPageState extends State<WeddingPage> {
           ),
 
           SizedBox(
-            width: containerWidth * 0.5,
-            height: containerWidth * 0.2,
+            width: MediaQuery.sizeOf(context).width * 0.45,
             child: Stack(
               alignment: Alignment.center,
               children: [

@@ -1,5 +1,6 @@
 import 'package:da_ry_invitation/services/audio_player_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class AudioPlayerButton extends StatefulWidget {
   const AudioPlayerButton({super.key});
@@ -14,16 +15,16 @@ class _AudioPlayerButtonState extends State<AudioPlayerButton> {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return IconButton(
       onPressed: () async {
         if (_isPlaying) {
           await audioService.pause();
         } else {
-          await audioService.play(); // ✅ Web-safe
+          await audioService.play();
         }
         setState(() => _isPlaying = !_isPlaying);
       },
-      child: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
+      icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
     );
   }
 }
