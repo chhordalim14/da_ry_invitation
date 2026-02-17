@@ -1,4 +1,3 @@
-import 'dart:html' as html; // Only needed for Web detection
 import 'package:flutter/foundation.dart'; // for kIsWeb
 import 'package:just_audio/just_audio.dart';
 
@@ -19,9 +18,7 @@ class AudioPlayerService {
     if (kIsWeb) {
       // Use URI for web assets
       await _player.setAudioSource(
-        AudioSource.uri(
-          Uri.parse('assets/audio/wedding_music.mp3'),
-        ),
+        AudioSource.uri(Uri.parse('assets/audio/wedding_music.mp3')),
       );
     } else {
       // Mobile: use asset normally
@@ -30,9 +27,11 @@ class AudioPlayerService {
       );
     }
 
-    await _player.playerStateStream.firstWhere((state) =>
-        state.processingState == ProcessingState.ready ||
-        state.processingState == ProcessingState.completed);
+    await _player.playerStateStream.firstWhere(
+      (state) =>
+          state.processingState == ProcessingState.ready ||
+          state.processingState == ProcessingState.completed,
+    );
 
     await _player.setLoopMode(LoopMode.one);
     _isInitialized = true;

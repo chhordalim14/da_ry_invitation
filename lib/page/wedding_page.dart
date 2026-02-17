@@ -1,6 +1,3 @@
-import 'dart:ui';
-import 'package:da_ry_invitation/core/constants/constants.dart';
-import 'package:da_ry_invitation/page/count_down_date.dart';
 import 'package:da_ry_invitation/page/event_list.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/audio_player_widget.dart';
@@ -79,7 +76,7 @@ class _WeddingPageState extends State<WeddingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+    // final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -269,7 +266,7 @@ class _WeddingPageState extends State<WeddingPage> {
       ).value,
       child: Text(
         'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
-        style: AppStyles.heading2(context).copyWith(
+        style: AppStyles.heading1(context).copyWith(
           color: Colors.amber[700],
           fontWeight: FontWeight.bold,
           fontFamily: 'Moulpali',

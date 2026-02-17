@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class EventStep {
   final String time;
@@ -68,11 +67,11 @@ class WeddingProgramStepper extends StatelessWidget {
       title: 'ពិធីសំពះផ្ទឹបចង់ដៃ',
       icon: 'assets/icons/icon_3.png',
     ),
-    EventStep(
-      time: 'ម៉ោង ១២:០០ ព្រឹក',
-      title: 'ពិសាអាហារពេលថ្ងៃត្រង់',
-      icon: 'assets/icons/icon_1.png',
-    ),
+    // EventStep(
+    //   time: 'ម៉ោង ១២:០០ ព្រឹក',
+    //   title: 'ពិសាអាហារពេលថ្ងៃត្រង់',
+    //   icon: 'assets/icons/icon_1.png',
+    // ),
     EventStep(
       time: 'ម៉ោង ០៥:០០ ល្ងាច',
       title: 'ពិសាហារពេលល្ងាច',
@@ -137,6 +136,11 @@ class WeddingProgramStepper extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
+        AnimatedSoftSCurveLine(
+          height: MediaQuery.sizeOf(context).height * 0.01,
+          width: MediaQuery.sizeOf(context).height * 0.25,
+          color: Colors.amber.shade700,
+        ),
         SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
 
         Wrap(
@@ -162,7 +166,7 @@ class WeddingProgramStepper extends StatelessWidget {
         children: [
           Text(
             'របៀបរារះកម្មវិធី / EVENT AGENDA',
-            style: AppStyles.heading2(context).copyWith(
+            style: AppStyles.heading1(context).copyWith(
               color: Colors.amber[700],
               // fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -170,12 +174,12 @@ class WeddingProgramStepper extends StatelessWidget {
             ),
           ),
           _daySection(
-            "កម្មវិធីថ្ងៃទីមួយ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
+            "កម្មវិធីថ្ងៃទី១ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
             day1Events,
             context,
           ),
           _daySection(
-            "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
+            "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៨ ខែមីនា ឆ្នាំ ២០២៦",
             day2Events,
             context,
           ),

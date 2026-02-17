@@ -1,4 +1,3 @@
-import 'package:da_ry_invitation/core/constants/constants.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:da_ry_invitation/widget/scroll_fade.dart';
 import 'package:flutter/material.dart';
