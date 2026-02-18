@@ -9,8 +9,9 @@ import 'package:da_ry_invitation/widget/grid_view.dart';
 import 'package:da_ry_invitation/widget/invitation_message_widget.dart';
 import 'package:da_ry_invitation/widget/location_section_widget.dart';
 import 'package:da_ry_invitation/widget/parent_section_widget.dart';
-import 'package:da_ry_invitation/widget/scroll_fade.dart';
+import 'package:da_ry_invitation/widget/scroll_hint_widget.dart';
 import 'package:da_ry_invitation/widget/scroll_reveal.dart';
+import 'package:da_ry_invitation/widget/thank_you_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -27,358 +28,319 @@ class WeddingPage extends StatefulWidget {
 
 class _WeddingPageState extends State<WeddingPage> {
   late VideoPlayerController _controller;
-  bool _showDetail = false; // Toggle UI
   late ScrollController _scrollController;
-  double _scrollOffset = 0;
   final audioService = AudioPlayerService();
+
+  bool _showDetail = false;
+  double _scrollOffset = 0;
+
   @override
   void initState() {
     super.initState();
 
-    // Listen to scroll
     _scrollController = ScrollController()
       ..addListener(() {
         setState(() {
           _scrollOffset = _scrollController.offset;
         });
       });
-    // // Initialize video controller
+
     _controller = VideoPlayerController.asset('assets/wedding_bg_video.mp4')
       ..initialize().then((_) {
         setState(() {});
         _controller
-          ..setVolume(0)
           ..setLooping(true)
+          ..setVolume(0)
           ..play();
       });
   }
 
   @override
   void dispose() {
+    _controller.dispose();
     _scrollController.dispose();
     super.dispose();
   }
 
-  // Widget scrollFadeText({
-  //   required Widget child,
-  //   required double start,
-  //   required double end,
-  //   Curve curve = Curves.easeOut,
-  // }) {
-  //   double opacity;
-
-  //   if (_scrollOffset <= start) {
-  //     opacity = 1;
-  //   } else if (_scrollOffset >= end) {
-  //     opacity = 0;
-  //   } else {
-  //     double progress = (_scrollOffset - start) / (end - start);
-  //     opacity = 1 - curve.transform(progress);
-  //   }
-
-  //   return Opacity(opacity: opacity.clamp(0.0, 1.0), child: child);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
+    final breakpoints = ResponsiveBreakpoints.of(context);
+    final isDesktop = breakpoints.isDesktop;
+    final isTablet = breakpoints.isTablet;
+
     return Scaffold(
       body: Stack(
-        fit: StackFit.expand,
         children: [
-          /// Video background
+          /// 🎥 Background Video (Proper Scaling)
           if (_controller.value.isInitialized)
-            FittedBox(
-              fit: BoxFit.fill,
-              child: SizedBox(
-                width: _controller.value.size.width,
-                height: _controller.value.size.height,
-                child: VideoPlayer(_controller),
+            Positioned.fill(
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: _controller.value.size.width,
+                  height: _controller.value.size.height,
+                  child: VideoPlayer(_controller),
+                ),
               ),
             ),
-          // FittedBox(fit: BoxFit.cover, child: VideoPlayer(_controller)),
-          // /// Dark overlay for text visibility
-          // Container(color: Colors.black.withValues(alpha: 0.25)),
-          // Image.asset('assets/2dba3765c761716c018552c5351cff9d.jpg', fit: BoxFit.cover),
 
-          /// Main content
-          Center(
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: _showDetail
-                  ? _buildDetailContent(context)
-                  : _buildMainContent(context),
-            ),
+          // /// 🌑 Elegant Overlay
+          // Positioned.fill(
+          //   child: Container(color: Colors.black.withValues(alpha: 0.25)),
+          // ),
+
+          /// 📜 Content Switcher
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: _showDetail
+                ? _buildDetailContent(context, isDesktop, isTablet)
+                : _buildMainContent(context, isDesktop),
           ),
-          Positioned(bottom: 40, right: 10, child: AudioPlayerButton()),
+
+          /// 🔊 Audio Button
+          const Positioned(bottom: 40, right: 20, child: AudioPlayerButton()),
         ],
       ),
     );
   }
 
-  Widget _buildMainContent(BuildContext context) {
-    // Using ResponsiveValue for dynamic sizing and spacing
-    final containerWidth = ResponsiveValue<double>(
+  // ==========================================================
+  // 🏠 MAIN SCREEN
+  // ==========================================================
+
+  Widget _buildMainContent(BuildContext context, bool isDesktop) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    final screenWidth = MediaQuery.sizeOf(context).width;
+
+    final maxWidth = isDesktop ? 700.0 : screenWidth;
+
+    return Center(
+      key: const ValueKey(1),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: SizedBox(
+            height: screenHeight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'សិរីមង្គលអាពាហ៍ពិពាហ៍',
+                  textAlign: TextAlign.center,
+                  style: AppStyles.heading2(
+                    context,
+                  ).copyWith(color: Colors.amber[700], fontFamily: 'Moulpali'),
+                ),
+
+                const SizedBox(height: 40),
+
+                Image.asset(
+                  'assets/wedding_frame_name_1.png',
+                  height: screenHeight * 0.22,
+                  fit: BoxFit.contain,
+                ),
+
+                const SizedBox(height: 30),
+
+                Text(
+                  'សូមគោរពអញ្ជើញ',
+                  textAlign: TextAlign.center,
+                  style: AppStyles.bodyText(
+                    context,
+                  ).copyWith(color: Colors.amber[700], fontFamily: 'Moulpali'),
+                ),
+
+                const SizedBox(height: 25),
+
+                _buildGuestBox(context),
+
+                const SizedBox(height: 40),
+
+                _buildOpenButton(context),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGuestBox(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenHeight = MediaQuery.sizeOf(context).height;
+
+    final horizontalPadding = screenWidth * 0.25;
+    final verticalPadding = screenHeight * 0.02;
+
+    return Center(
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
+          vertical: verticalPadding,
+        ),
+        // alignment: Alignment.center,
+        decoration: BoxDecoration(
+          // borderRadius: BorderRadius.circular(
+          //   screenWidth * 0.02,
+          // ), // radius responsive
+          image: const DecorationImage(
+            image: AssetImage('assets/name_box_1.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Text(
+          widget.guestName?.capitalize() ?? 'ភ្ញៀវកិត្តិយស',
+          textAlign: TextAlign.center,
+          style: AppStyles.bodyText2(context).copyWith(
+            color: Colors.amber[700],
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Moulpali',
+            // fontSize: fontSize,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOpenButton(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenHeight = MediaQuery.sizeOf(context).height;
+
+    // Responsive width
+    final buttonWidth = ResponsiveValue<double>(
       context,
-      defaultValue: MediaQuery.of(context).size.width * 0.85,
+      defaultValue: screenWidth * 0.7, // mobile default
       conditionalValues: [
+        Condition.largerThan(name: MOBILE, value: screenWidth * 0.5),
+        Condition.largerThan(name: TABLET, value: screenWidth * 0.35),
         Condition.largerThan(
-          name: MOBILE,
-          value: MediaQuery.of(context).size.width * 0.6,
-        ),
-        Condition.largerThan(
-          name: TABLET,
-          value: MediaQuery.of(context).size.width * 0.4,
-        ),
+          name: DESKTOP,
+          value: 280,
+        ), // keep original for desktop
       ],
     ).value;
 
-    return SizedBox(
-      // color: Colors.red,
-      height: containerWidth * 1.2,
-      child: Column(
-        key: const ValueKey(1),
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'សិរីមង្គលអាពាហ៏ពិពាហ៍',
-            style: AppStyles.heading1(context).copyWith(
-              color: Colors.amber[700],
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Moulpali',
-            ),
-            // textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: containerWidth * 0.4,
-            child: Image.asset(
-              'assets/wedding_frame_name_1.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          Text(
-            'សូមគោរពអញ្ជើញ',
-            style: AppStyles.heading2(context).copyWith(
-              color: Colors.amber[700],
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Moulpali',
-            ),
-            textAlign: TextAlign.center,
-          ),
+    // Responsive height
+    final buttonHeight = ResponsiveValue<double>(
+      context,
+      defaultValue: screenHeight * 0.06, // mobile default
+      conditionalValues: [
+        Condition.largerThan(name: MOBILE, value: screenHeight * 0.055),
+        Condition.largerThan(name: TABLET, value: screenHeight * 0.05),
+        Condition.largerThan(name: DESKTOP, value: 50),
+      ],
+    ).value;
 
-          SizedBox(
-            width: MediaQuery.sizeOf(context).width * 0.45,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Image.asset(
-                  'assets/name_box.png',
-                  fit: BoxFit.fill,
-                  color: Colors.amber[700],
+    return GestureDetector(
+          onTap: () {
+            audioService.play();
+            setState(() => _showDetail = true);
+          },
+          child: Container(
+            width: buttonWidth,
+            height: buttonHeight,
+            decoration: BoxDecoration(
+              color: Colors.amber[700],
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 6),
                 ),
-                Text(
-                  widget.guestName?.capitalize() ?? 'ភ្ញៀវកិត្តិយស',
-                  textAlign: TextAlign.center,
-                  style: AppStyles.bodyText1(context).copyWith(
-                    color: Colors.amber[700],
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Moulpali',
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  FontAwesomeIcons.envelopeOpen,
+                  size: 18,
+                  color: Colors.white,
+                ),
+                SizedBox(width: screenWidth * 0.02),
+                Flexible(
+                  child: Text(
+                    'សូមចុចបើកធៀប',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.buttonText(context),
                   ),
                 ),
               ],
             ),
           ),
-
-          /// Liquid Glass Button
-          GestureDetector(
-                onTap: () {
-                  audioService.play();
-                  setState(() {
-                    _showDetail = true;
-                  });
-                },
-                child: Container(
-                  width: ResponsiveValue<double>(
-                    context,
-                    defaultValue: MediaQuery.sizeOf(context).height * 0.25,
-                    conditionalValues: [
-                      Condition.largerThan(
-                        name: TABLET,
-                        value: MediaQuery.sizeOf(context).height * 0.3,
-                      ),
-                      Condition.largerThan(
-                        name: DESKTOP,
-                        value: MediaQuery.sizeOf(context).width * 0.4,
-                      ),
-                    ],
-                  ).value,
-                  height: MediaQuery.sizeOf(context).height * 0.05,
-                  decoration: BoxDecoration(
-                    color: Colors.amber[700],
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade500,
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                        offset: const Offset(4, 4),
-                      ),
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                        offset: const Offset(-4, -4),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.envelopeOpen,
-                        size: 16,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: MediaQuery.sizeOf(context).width * 0.03),
-                      Flexible(
-                        child: Text(
-                          'សូមចុចបើកធៀប',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppStyles.bodyText(context).copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Moulpali',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-              .animate(onPlay: (controller) => controller.repeat(reverse: true))
-              .scale(
-                begin: const Offset(1, 1),
-                end: const Offset(1.05, 1.05),
-                duration: 1.seconds,
-                curve: Curves.easeInOut,
-              ),
-        ],
-      ),
-    );
+        )
+        .animate(onPlay: (c) => c.repeat(reverse: true))
+        .scale(
+          begin: const Offset(1, 1),
+          end: const Offset(1.05, 1.05),
+          duration: 1.seconds,
+        );
   }
 
-  // --- Refactored Detail Content Widgets ---
+  // ==========================================================
+  // 📜 DETAIL SCREEN
+  // ==========================================================
 
-  Widget _buildInvitationHeader() {
-    return ScrollFade(
-      controller: _scrollController,
-      start: ResponsiveValue<double>(
-        context,
-        defaultValue: 0,
-        conditionalValues: [
-          Condition.equals(name: MOBILE, value: 0),
-          Condition.equals(name: TABLET, value: 100),
-          Condition.equals(name: DESKTOP, value: 130),
-        ],
-      ).value,
-      end: ResponsiveValue<double>(
-        context,
-        defaultValue: 100,
-        conditionalValues: [
-          Condition.equals(name: MOBILE, value: 100),
-          Condition.equals(name: TABLET, value: 100),
-          Condition.equals(name: DESKTOP, value: 230),
-        ],
-      ).value,
-      child: Text(
-        'សិរីសួស្តីអាពាហ៏ពិពាហ៍',
-        style: AppStyles.heading1(context).copyWith(
-          color: Colors.amber[700],
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Moulpali',
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+  Widget _buildDetailContent(
+    BuildContext context,
+    bool isDesktop,
+    bool isTablet,
+  ) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
 
-  Widget _buildEventTimeAndLocation() {
-    return ScrollFade(
-      controller: _scrollController,
-      start: 400,
-      end: 500,
-      child: Text(
-        'ថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩\nត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច នៅ សាខាកាកបាទក្រហមកម្ពុជា ខេត្តកណ្ដាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
-        style: AppStyles.bodyText1(
-          context,
-        ).copyWith(color: Colors.amber[700], fontFamily: 'KantumruyPro'),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-
-  Widget _buildDetailContent(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    final isDesktop = ResponsiveBreakpoints.of(context).isDesktop;
-    final isTablet = ResponsiveBreakpoints.of(context).isTablet;
-
-    // 👉 Width control
-    double contentWidth = screenWidth;
-
-    if (isDesktop) {
-      contentWidth = screenWidth * 0.5; // 60% on desktop
-    } else if (isTablet) {
-      contentWidth = screenWidth * 0.85; // optional tablet control
-    } else {
-      contentWidth = screenWidth; // full width on mobile
-    }
-
-    final verticalSpacing = ResponsiveValue<double>(
-      context,
-      defaultValue: 18,
-      conditionalValues: [
-        Condition.equals(name: MOBILE, value: 18.0),
-        Condition.equals(name: TABLET, value: 24.0),
-        Condition.equals(name: DESKTOP, value: 28.0),
-      ],
-    ).value;
+    double maxWidth = screenWidth;
+    if (isDesktop)
+      maxWidth = 900;
+    else if (isTablet)
+      maxWidth = 700;
 
     return SafeArea(
+      key: const ValueKey(2),
       child: SingleChildScrollView(
         controller: _scrollController,
-        key: const ValueKey(2),
         physics: const BouncingScrollPhysics(),
         child: Center(
-          // 👈 important
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: contentWidth, // 👈 responsive width here
-            ),
+            constraints: BoxConstraints(maxWidth: maxWidth),
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 18,
-                vertical: verticalSpacing,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 100,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: verticalSpacing * 4),
-                  _buildInvitationHeader(),
-                  SizedBox(height: verticalSpacing),
-                  ParentSectionWidget(scrollController: _scrollController),
-                  SizedBox(height: verticalSpacing),
-                  InvitationMessage(scrollController: _scrollController),
-                  SizedBox(height: verticalSpacing),
-                  BrideAndGroomSection(scrollController: _scrollController),
-                  SizedBox(height: verticalSpacing),
-                  _buildEventTimeAndLocation(),
-                  SizedBox(height: verticalSpacing * 4),
-                  _buildScrollHint(verticalSpacing),
+                  Text(
+                    'សិរីសួស្តីអាពាហ៍ពិពាហ៍',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.heading2(context).copyWith(
+                      color: Colors.amber[700],
+                      fontFamily: 'Moulpali',
+                    ),
+                  ),
 
-                  SizedBox(height: verticalSpacing * 5),
+                  const SizedBox(height: 40),
+
+                  // Parent Section
+                  ParentSectionWidget(scrollController: _scrollController),
+
+                  const SizedBox(height: 40),
+
+                  // Invitation Message
+                  InvitationMessage(scrollController: _scrollController),
+
+                  const SizedBox(height: 40),
+
+                  // Bride & Groom Section
+                  BrideAndGroomSection(scrollController: _scrollController),
+
+                  const SizedBox(height: 150),
+
+                  ScrollHint(scrollOffset: _scrollOffset),
+                  const SizedBox(height: 40),
+
+                  // English Invitation
                   ScrollPullReveal(
                     controller: _scrollController,
                     start: 100,
@@ -388,62 +350,48 @@ class _WeddingPageState extends State<WeddingPage> {
                     ),
                   ),
 
-                  SizedBox(height: verticalSpacing * 4),
-                  WeddingProgramStepper(),
+                  const SizedBox(height: 80),
 
-                  SizedBox(height: verticalSpacing * 4),
-                  LocationSection(),
+                  // Wedding Program Stepper
+                  ScrollPullReveal(
+                    controller: _scrollController,
+                    start: 1500,
+                    end: 1850,
+                    child: WeddingProgramStepper(),
+                  ),
 
-                  SizedBox(height: verticalSpacing * 4),
+                  const SizedBox(height: 80),
 
-                  MasonryGridExample(),
-                  SizedBox(height: verticalSpacing * 3),
+                  // Location Section
+                  ScrollPullReveal(
+                    controller: _scrollController,
+                    start: 2800,
+                    end: 3050,
+                    child: LocationSection(),
+                  ),
+
+                  const SizedBox(height: 80),
+
+                  // Masonry Grid Gallery
+                  ScrollPullReveal(
+                    controller: _scrollController,
+                    start: 3000,
+                    end: 3250,
+                    child: MasonryGridExample(),
+                  ),
+                  const SizedBox(height: 80),
+                  ScrollPullReveal(
+                    controller: _scrollController,
+                    start: 4700,
+                    end: 4950,
+                    child: ThankYouWidget(),
+                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildScrollHint(double verticalSpacing) {
-    double startFade = 100;
-    double endFade = 250;
-
-    double opacity;
-
-    if (_scrollOffset <= startFade) {
-      opacity = 1;
-    } else if (_scrollOffset >= endFade) {
-      opacity = 0;
-    } else {
-      double progress = (_scrollOffset - startFade) / (endFade - startFade);
-      opacity = 1 - progress;
-    }
-
-    return Opacity(
-      opacity: opacity.clamp(0.0, 1.0),
-      child:
-          Column(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.anglesUp,
-                    color: Colors.amber[700],
-                    size: 20,
-                  ),
-                  SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-                  Text(
-                    'អូសឡើងលើ',
-                    style: AppStyles.bodyText1(context).copyWith(
-                      color: Colors.amber[700],
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              )
-              .animate(onPlay: (controller) => controller.repeat())
-              .shakeY(duration: Duration(seconds: 4), hz: 0.6),
     );
   }
 }

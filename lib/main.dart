@@ -11,10 +11,7 @@ void main() {
 
 final _router = GoRouter(
   routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const WeddingPage(),
-    ),
+    GoRoute(path: '/', builder: (context, state) => const WeddingPage()),
     GoRoute(
       path: '/guest/:name',
       builder: (context, state) {

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CountdownTimer extends StatefulWidget {
   final DateTime targetDate;
@@ -49,40 +50,106 @@ class _CountdownTimerState extends State<CountdownTimer> {
     final minutes = _remaining.inMinutes % 60;
     final seconds = _remaining.inSeconds % 60;
 
+    final double paddingVertical = ResponsiveValue<double>(
+      context,
+      defaultValue: MediaQuery.sizeOf(context).height * 0.02,
+      conditionalValues: [
+        Condition.largerThan(
+          name: MOBILE,
+          value: MediaQuery.sizeOf(context).height * 0.03,
+        ),
+        Condition.largerThan(
+          name: TABLET,
+          value: MediaQuery.sizeOf(context).height * 0.04,
+        ),
+      ],
+    ).value;
+
+    final double paddingHorizontal = ResponsiveValue<double>(
+      context,
+      defaultValue: MediaQuery.sizeOf(context).width * 0.04,
+      conditionalValues: [
+        Condition.largerThan(
+          name: MOBILE,
+          value: MediaQuery.sizeOf(context).width * 0.03,
+        ),
+        Condition.largerThan(
+          name: TABLET,
+          value: MediaQuery.sizeOf(context).width * 0.05,
+        ),
+      ],
+    ).value;
+
+    final double spacing = ResponsiveValue<double>(
+      context,
+      defaultValue: MediaQuery.sizeOf(context).height * 0.004,
+      conditionalValues: [
+        Condition.largerThan(
+          name: MOBILE,
+          value: MediaQuery.sizeOf(context).height * 0.006,
+        ),
+        Condition.largerThan(
+          name: TABLET,
+          value: MediaQuery.sizeOf(context).height * 0.008,
+        ),
+      ],
+    ).value;
+
+    final double colonSpacing = ResponsiveValue<double>(
+      context,
+      defaultValue: MediaQuery.sizeOf(context).height * 0.006,
+      conditionalValues: [
+        Condition.largerThan(
+          name: MOBILE,
+          value: MediaQuery.sizeOf(context).height * 0.008,
+        ),
+        Condition.largerThan(
+          name: TABLET,
+          value: MediaQuery.sizeOf(context).height * 0.01,
+        ),
+      ],
+    ).value;
+
     return Stack(
       alignment: Alignment.center,
       children: [
         // Background image
         ClipRRect(
-          borderRadius: BorderRadiusGeometry.circular(16),
+          borderRadius: BorderRadius.circular(16),
           child: Image.asset(
             'assets/wedding/wedding_image_11.jpg',
             fit: BoxFit.cover,
+            width: double.infinity,
           ),
         ),
 
-        // Frosted backdrop + countdown
+        // Frosted overlay + countdown
         Positioned(
-          bottom: MediaQuery.sizeOf(context).height * 0.2,
+          bottom: ResponsiveValue<double>(
+            context,
+            defaultValue: MediaQuery.sizeOf(context).height * 0.15,
+            conditionalValues: [
+              Condition.largerThan(
+                name: MOBILE,
+                value: MediaQuery.sizeOf(context).height * 0.13,
+              ),
+              Condition.largerThan(
+                name: TABLET,
+                value: MediaQuery.sizeOf(context).height * 0.1,
+              ),
+            ],
+          ).value,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(
-              16,
-            ), // rounded edges for the frosted box
+            borderRadius: BorderRadius.circular(16),
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 5,
-                sigmaY: 5,
-              ), // adjust blur strength
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                // width: MediaQuery.sizeOf(context).width * 0.8,
                 padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.02,
-                  horizontal: MediaQuery.of(context).size.width * 0.04,
+                  vertical: paddingVertical,
+                  horizontal: paddingHorizontal,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(
-                    alpha: 0.2,
-                  ), // semi-transparent overlay
+                  color: Colors.black.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -90,27 +157,25 @@ class _CountdownTimerState extends State<CountdownTimer> {
                   children: [
                     Text(
                       "ចំនួនថ្ងៃរាប់ថយក្រោយ",
-                      style: AppStyles.heading2(context).copyWith(
+                      style: AppStyles.bodyText(context).copyWith(
                         color: Colors.amber[700],
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Moulpali',
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.012,
-                    ),
+                    SizedBox(height: spacing * 3),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        _timeBox(context, days, "ថ្ងៃ"),
-                        _colon(context),
-                        _timeBox(context, hours, "ម៉ោង"),
-                        _colon(context),
-                        _timeBox(context, minutes, "នាទី"),
-                        _colon(context),
-                        _timeBox(context, seconds, "វិនាទី"),
+                        _timeBox(context, days, "ថ្ងៃ", spacing),
+                        _colon(context, colonSpacing),
+                        _timeBox(context, hours, "ម៉ោង", spacing),
+                        _colon(context, colonSpacing),
+                        _timeBox(context, minutes, "នាទី", spacing),
+                        _colon(context, colonSpacing),
+                        _timeBox(context, seconds, "វិនាទី", spacing),
                       ],
                     ),
                   ],
@@ -123,23 +188,24 @@ class _CountdownTimerState extends State<CountdownTimer> {
     );
   }
 
-  Widget _colon(BuildContext context) {
+  Widget _colon(BuildContext context, double spacing) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.sizeOf(context).height * 0.006,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: spacing),
       child: Text(
         ":",
-        style: AppStyles.heading1(context).copyWith(
-          // fontSize: 28,
-          color: Colors.amber[700],
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppStyles.heading1(
+          context,
+        ).copyWith(color: Colors.amber[700], fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  Widget _timeBox(BuildContext context, int value, String label) {
+  Widget _timeBox(
+    BuildContext context,
+    int value,
+    String label,
+    double spacing,
+  ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -147,12 +213,11 @@ class _CountdownTimerState extends State<CountdownTimer> {
           value.toString().padLeft(2, '0'),
           style: AppStyles.heading1(context).copyWith(
             color: Colors.amber[700],
-            // fontSize: 28,
             fontWeight: FontWeight.bold,
             fontFamily: 'KantumruyPro',
           ),
         ),
-        SizedBox(height: MediaQuery.sizeOf(context).height * 0.004),
+        SizedBox(height: spacing),
         Text(
           label,
           style: AppStyles.bodyText(context).copyWith(

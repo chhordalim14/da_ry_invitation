@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class EventStep {
   final String time;
@@ -29,11 +30,6 @@ class WeddingProgramStepper extends StatelessWidget {
       title: 'ពិធីជាវខាន់ស្លា',
       icon: 'assets/icons/icon_15.png',
     ),
-    // EventStep(
-    //   time: 'ម៉ោង ០៥:០០ រសៀល',
-    //   title: 'ពិសាអាហារពេលល្ងាច',
-    //   icon: 'assets/icons/icon_17.png',
-    // ),
   ];
 
   final List<EventStep> day2Events = [
@@ -64,56 +60,59 @@ class WeddingProgramStepper extends StatelessWidget {
     ),
     EventStep(
       time: 'ម៉ោង ១១:០០ ព្រឹក',
-      title: 'ពិធីសំពះផ្ទឹបចង់ដៃ',
+      title: 'ពិធីសំពះផ្ទឹមចង់ដៃ',
       icon: 'assets/icons/icon_19.png',
     ),
-    // EventStep(
-    //   time: 'ម៉ោង ១២:០០ ព្រឹក',
-    //   title: 'ពិសាអាហារពេលថ្ងៃត្រង់',
-    //   icon: 'assets/icons/icon_1.png',
-    // ),
     EventStep(
       time: 'ម៉ោង ០៥:០០ ល្ងាច',
-      title: 'ពិសាហារពេលល្ងាច',
+      title: 'ពិសាអាហារពេលល្ងាច',
       icon: 'assets/icons/icon_16.png',
     ),
   ];
 
-  Widget _timelineItem(EventStep event, BuildContext context) {
+  Widget _timelineItem(
+    EventStep event,
+    BuildContext context,
+    double iconSize,
+    double spacing,
+  ) {
     return Column(
-      // mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: MediaQuery.sizeOf(context).height * 0.05,
-          height: MediaQuery.sizeOf(context).height * 0.05,
+          width: iconSize,
+          height: iconSize,
           child: Image.asset(event.icon, fit: BoxFit.contain),
         ),
+        SizedBox(height: spacing / 5),
         AnimatedSoftSCurveLine(
-          height: MediaQuery.sizeOf(context).height * 0.02,
-          width: MediaQuery.sizeOf(context).height * 0.04,
+          height: spacing,
+          width: iconSize,
           color: Colors.amber,
         ),
-        SizedBox(height: MediaQuery.sizeOf(context).height * 0.001),
+        SizedBox(height: spacing / 5),
         Text(
           event.time,
-          style: AppStyles.bodyText1(
-            context,
-          ).copyWith(color: Colors.amber[700], fontFamily: 'KantumruyPro'),
+          style: AppStyles.bodyText1(context).copyWith(
+            color: Colors.amber[700],
+            fontFamily: 'KantumruyPro',
+            fontSize: iconSize * 0.3,
+          ),
         ),
-        SizedBox(height: MediaQuery.sizeOf(context).height * 0.001),
+        SizedBox(height: spacing / 4),
         SizedBox(
-          width: MediaQuery.sizeOf(context).height * 0.1,
+          width: iconSize * 2,
           child: Text(
             event.title,
             style: AppStyles.bodyText1(context).copyWith(
               color: Colors.amber[700],
               fontWeight: FontWeight.bold,
               fontFamily: 'KantumruyPro',
+              // fontSize: iconSize * 0.35,
             ),
             textAlign: TextAlign.center,
           ),
         ),
-        SizedBox(height: MediaQuery.sizeOf(context).height * 0.001),
       ],
     );
   }
@@ -122,32 +121,29 @@ class WeddingProgramStepper extends StatelessWidget {
     String title,
     List<EventStep> events,
     BuildContext context,
+    double iconSize,
+    double spacing,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           title,
-          style: AppStyles.heading2(context).copyWith(
+          style: AppStyles.bodyText(context).copyWith(
             color: Colors.amber[700],
             fontWeight: FontWeight.bold,
             fontFamily: 'IMFellEnglishSC',
+            // fontSize: iconSize * 0.6,
           ),
           textAlign: TextAlign.center,
         ),
-
-        SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
-
+        SizedBox(height: spacing),
         Wrap(
           alignment: WrapAlignment.center,
-          spacing:
-              MediaQuery.sizeOf(context).height *
-              0.03, // horizontal spacing between items
-          runSpacing:
-              MediaQuery.sizeOf(context).height *
-              0.02, // vertical spacing between lines
+          spacing: spacing,
+          runSpacing: spacing,
           children: events
-              .map((event) => _timelineItem(event, context))
+              .map((event) => _timelineItem(event, context, iconSize, spacing))
               .toList(),
         ),
       ],
@@ -156,31 +152,55 @@ class WeddingProgramStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final breakpoints = ResponsiveBreakpoints.of(context);
+    final isDesktop = breakpoints.isDesktop;
+    final isTablet = breakpoints.isTablet;
+
+    // Dynamic sizing
+    final double iconSize = isDesktop
+        ? 80
+        : isTablet
+        ? 60
+        : 50;
+    final double spacing = isDesktop
+        ? 24
+        : isTablet
+        ? 20
+        : 16;
+
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(
-            'ររបៀបវារៈកម្មវិធី / EVENT AGENDA',
-            style: AppStyles.heading2(context).copyWith(
-              color: Colors.amber[700],
-              // fontSize: 18,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Moulpali',
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: spacing),
+        child: Column(
+          children: [
+            Text(
+              'របៀបវារៈកម្មវិធី / EVENT AGENDA',
+              style: AppStyles.bodyText(context).copyWith(
+                color: Colors.amber[700],
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Moulpali',
+                // fontSize: iconSize * 0.6,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          SizedBox(height: MediaQuery.sizeOf(context).height * 0.05),
-          _daySection(
-            "កម្មវិធីថ្ងៃទី១ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
-            day1Events,
-            context,
-          ),
-          SizedBox(height: MediaQuery.sizeOf(context).height * 0.08),
-          _daySection(
-            "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៨ ខែមីនា ឆ្នាំ ២០២៦",
-            day2Events,
-            context,
-          ),
-        ],
+            SizedBox(height: spacing * 3),
+            _daySection(
+              "កម្មវិធីថ្ងៃទី១ ថ្ងៃសៅរ៍ ទី ០៧ ខែមីនា ឆ្នាំ ២០២៦",
+              day1Events,
+              context,
+              iconSize,
+              spacing,
+            ),
+            SizedBox(height: spacing * 3),
+            _daySection(
+              "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៨ ខែមីនា ឆ្នាំ ២០២៦",
+              day2Events,
+              context,
+              iconSize,
+              spacing,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -237,9 +257,8 @@ class SoftSCurveLinePainterHorizontal extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     final path = Path();
-    path.moveTo(0, size.height / 2); // start from left middle
+    path.moveTo(0, size.height / 2);
 
-    // Left → middle (curve down)
     path.cubicTo(
       size.width * 0.25,
       size.height / 2 + curveAmount,
@@ -249,7 +268,6 @@ class SoftSCurveLinePainterHorizontal extends CustomPainter {
       size.height / 2,
     );
 
-    // Middle → right (curve up)
     path.cubicTo(
       size.width * 0.75,
       size.height / 2 - curveAmount,

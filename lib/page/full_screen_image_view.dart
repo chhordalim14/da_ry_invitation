@@ -33,6 +33,8 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -45,26 +47,32 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
             },
             itemBuilder: (context, index) {
               return InteractiveViewer(
-                // panEnabled: true,
-                // scaleEnabled: true,
-                // minScale: 1.0,
-                // maxScale: 4.0,
+                panEnabled: true,
+                scaleEnabled: true,
+                minScale: 1.0,
+                maxScale: 4.0,
                 child: Center(
-                  child: Image.asset(widget.images[index], fit: BoxFit.contain),
+                  child: Image.asset(
+                    widget.images[index],
+                    fit: BoxFit.contain,
+                    width: screenWidth,
+                  ),
                 ),
               );
             },
           ),
           // Close button
           Positioned(
-            top: 40,
+            top: 20,
             right: 20,
-            child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.white, size: 30),
-              onPressed: () => Navigator.of(context).pop(),
+            child: SafeArea(
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.white, size: 30),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
             ),
           ),
-          // Optional: index indicator
+          // Index indicator
           Positioned(
             bottom: 40,
             left: 0,
@@ -72,7 +80,11 @@ class _FullScreenImageViewState extends State<FullScreenImageView> {
             child: Center(
               child: Text(
                 '${_currentIndex + 1} / ${widget.images.length}',
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: screenWidth * 0.04,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

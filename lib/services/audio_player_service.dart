@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 
 class AudioPlayerService {
-  static final AudioPlayerService _instance =
-      AudioPlayerService._internal();
+  static final AudioPlayerService _instance = AudioPlayerService._internal();
 
   late final AudioPlayer _player;
   bool _isInitialized = false;
@@ -18,9 +17,7 @@ class AudioPlayerService {
     if (_isInitialized) return;
 
     if (kIsWeb) {
-      await _player.setUrl(
-        'assets/assets/audio/wedding_music.mp3',
-      );
+      await _player.setUrl('assets/assets/audio/wedding_music.mp3');
     } else {
       await _player.setAsset('assets/audio/wedding_music.mp3');
     }

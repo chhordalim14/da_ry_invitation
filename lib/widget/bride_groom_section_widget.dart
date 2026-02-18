@@ -1,118 +1,102 @@
 import 'package:da_ry_invitation/core/widget/app_styles.dart';
-import 'package:da_ry_invitation/widget/scroll_fade.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class BrideAndGroomSection extends StatelessWidget {
   const BrideAndGroomSection({super.key, required this.scrollController});
   final ScrollController scrollController;
+
   @override
   Widget build(BuildContext context) {
-    return ResponsiveRowColumn(
-      layout: ResponsiveValue<ResponsiveRowColumnType>(
-        context,
-        defaultValue: ResponsiveRowColumnType.ROW,
-        conditionalValues: [
-          Condition.smallerThan(
-            name: TABLET,
-            value: ResponsiveRowColumnType.ROW,
-          ),
-        ],
-      ).value,
+    final breakpoints = ResponsiveBreakpoints.of(context);
+    final isDesktop = breakpoints.isDesktop;
 
-      rowMainAxisAlignment: MainAxisAlignment.center,
-      // rowVerticalDirection: VerticalDirection.down,
-      // rowCrossAxisAlignment: CrossAxisAlignment.center,
-      // columnCrossAxisAlignment: CrossAxisAlignment.center,
+    const double verticalSpacing = 12;
+    const double horizontalSpacing = 24;
 
-      // columnSpacing: MediaQuery.sizeOf(context).height * 0.02,
-      children: [
-        ResponsiveRowColumnItem(
-          child: Column(
-            children: [
-              ScrollFade(
-                controller: scrollController,
-                start: 300,
-                end: 400,
-                child: Text(
-                  'កូនប្រុសនាម',
-                  style: AppStyles.bodyText(context).copyWith(
-                    color: Colors.amber[700],
+    // Set max width for readability
+    final maxWidth = isDesktop ? 900.0 : double.infinity;
 
-                    // fontSize: 18,
-                    // fontWeight: FontWeight.bold,
+    // Image size
+    final double imageSize = isDesktop ? 150 : 120;
+
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            /// Groom Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'កូនប្រុសនាម',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.bodyText(
+                      context,
+                    ).copyWith(color: Colors.amber[700]),
                   ),
-                ),
-              ),
-              SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-              ScrollFade(
-                controller: scrollController,
-                start: 350,
-                end: 450,
-                child: Text(
-                  'លឺម ឆដា',
-                  style: AppStyles.heading2(context).copyWith(
-                    color: Colors.amber[700],
-                    // fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Moulpali',
+                  const SizedBox(height: verticalSpacing),
+                  Text(
+                    'លឹម ឆដា',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.heading2(context).copyWith(
+                      color: Colors.amber[700],
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Moulpali',
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: ScrollFade(
-            controller: scrollController,
-            start: 320,
-            end: 420,
-            child: SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.12,
-              width: MediaQuery.sizeOf(context).height * 0.12,
+            ),
+
+            /// Spacer
+            const SizedBox(width: horizontalSpacing),
+
+            /// Center Image
+            SizedBox(
+              width: imageSize,
+              height: imageSize,
               child: Image.asset(
                 'assets/wedding_frame_name_1.png',
                 fit: BoxFit.contain,
               ),
             ),
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: Column(
-            children: [
-              ScrollFade(
-                controller: scrollController,
-                start: 300,
-                end: 400,
-                child: Text(
-                  'កូនស្រីនាម',
-                  style: AppStyles.bodyText(context).copyWith(
-                    color: Colors.amber[700],
 
-                    // fontSize: 18,
-                    // fontWeight: FontWeight.bold,
+            /// Spacer
+            const SizedBox(width: horizontalSpacing),
+
+            /// Bride Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'កូនស្រីនាម',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.bodyText(
+                      context,
+                    ).copyWith(color: Colors.amber[700]),
                   ),
-                ),
-              ),
-              SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
-              ScrollFade(
-                controller: scrollController,
-                start: 350,
-                end: 450,
-                child: Text(
-                  'យី សុធារី',
-                  style: AppStyles.heading2(context).copyWith(
-                    color: Colors.amber[700],
-                    // fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Moulpali',
+                  const SizedBox(height: verticalSpacing),
+                  Text(
+                    'យី សុធារី',
+                    textAlign: TextAlign.center,
+                    style: AppStyles.heading2(context).copyWith(
+                      color: Colors.amber[700],
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Moulpali',
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

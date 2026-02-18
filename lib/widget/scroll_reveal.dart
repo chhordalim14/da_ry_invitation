@@ -41,8 +41,7 @@ class _ScrollPullRevealState extends State<ScrollPullReveal> {
     } else if (offset >= widget.end) {
       _progress = 1;
     } else {
-      _progress =
-          (offset - widget.start) / (widget.end - widget.start);
+      _progress = (offset - widget.start) / (widget.end - widget.start);
     }
 
     setState(() {});
@@ -60,17 +59,13 @@ class _ScrollPullRevealState extends State<ScrollPullReveal> {
 
     final translateY = widget.maxTranslate * (1 - curved);
     final opacity = curved;
-    final scale =
-        widget.minScale + (1 - widget.minScale) * curved;
+    final scale = widget.minScale + (1 - widget.minScale) * curved;
 
     return Opacity(
       opacity: opacity.clamp(0.0, 1.0),
       child: Transform.translate(
         offset: Offset(0, translateY),
-        child: Transform.scale(
-          scale: scale,
-          child: widget.child,
-        ),
+        child: Transform.scale(scale: scale, child: widget.child),
       ),
     );
   }

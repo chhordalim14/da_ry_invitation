@@ -5,24 +5,14 @@ class AppStyles {
   static TextStyle heading1(BuildContext context) {
     return TextStyle(
       color: Colors.white,
-      fontSize: ResponsiveValue<double>(
+      fontSize: ResponsiveFont.size(
         context,
-        defaultValue: MediaQuery.sizeOf(context).height * 0.024,
-        conditionalValues: [
-          Condition.equals(
-            name: MOBILE,
-            value: MediaQuery.sizeOf(context).height * 0.024,
-          ),
-          Condition.equals(
-            name: TABLET,
-            value: MediaQuery.sizeOf(context).height * 0.028,
-          ),
-          Condition.equals(
-            name: DESKTOP,
-            value: MediaQuery.sizeOf(context).height * 0.032,
-          ),
-        ],
-      ).value,
+        mobile: 28,
+        tablet: 34,
+        desktop: 40,
+        min: 22,
+        max: 64,
+      ),
       fontWeight: FontWeight.bold,
     );
   }
@@ -30,24 +20,14 @@ class AppStyles {
   static TextStyle heading2(BuildContext context) {
     return TextStyle(
       color: Colors.white,
-      fontSize: ResponsiveValue<double>(
+      fontSize: ResponsiveFont.size(
         context,
-        defaultValue: MediaQuery.sizeOf(context).height * 0.020,
-        conditionalValues: [
-          Condition.equals(
-            name: MOBILE,
-            value: MediaQuery.sizeOf(context).height * 0.020,
-          ),
-          Condition.equals(
-            name: TABLET,
-            value: MediaQuery.sizeOf(context).height * 0.022,
-          ),
-          Condition.equals(
-            name: DESKTOP,
-            value: MediaQuery.sizeOf(context).height * 0.024,
-          ),
-        ],
-      ).value,
+        mobile: 22,
+        tablet: 26,
+        desktop: 32,
+        min: 18,
+        max: 40,
+      ),
       fontWeight: FontWeight.bold,
     );
   }
@@ -55,62 +35,94 @@ class AppStyles {
   static TextStyle bodyText(BuildContext context) {
     return TextStyle(
       color: Colors.white,
-      height: 1.5, // Improved line spacing for readability
-      fontSize: ResponsiveValue<double>(
+      height: 1.5,
+      fontSize: ResponsiveFont.size(
         context,
-        defaultValue: 14,
-        conditionalValues: [
-          Condition.equals(name: MOBILE, value: 14),
-          Condition.equals(name: TABLET, value: 16),
-          Condition.equals(name: DESKTOP, value: 18),
-        ],
-      ).value,
-      fontWeight: FontWeight.w500, // Medium weight for body text
+        mobile: 16,
+        tablet: 18,
+        desktop: 20,
+        min: 14,
+        max: 22,
+      ),
+      fontWeight: FontWeight.w500,
     );
   }
 
   static TextStyle bodyText1(BuildContext context) {
     return TextStyle(
       color: Colors.white,
-      height: 1.5, // Improved line spacing for readability
-      fontSize: ResponsiveValue<double>(
+      height: 1.5,
+      fontSize: ResponsiveFont.size(
         context,
-        defaultValue: 16.0,
-        conditionalValues: [
-          Condition.equals(name: MOBILE, value: 16),
-          Condition.equals(name: TABLET, value: 18),
-          Condition.equals(name: DESKTOP, value: 20),
-        ],
-      ).value,
-      fontWeight: FontWeight.w400, // Medium weight for body text
+        mobile: 16,
+        tablet: 18,
+        desktop: 20,
+        min: 14,
+        max: 22,
+      ),
+      fontWeight: FontWeight.w400,
     );
   }
 
-  static TextStyle subtleText(BuildContext context) {
+  static TextStyle bodyText2(BuildContext context) {
     return TextStyle(
-      color: Colors.white.withValues(alpha: 0.8),
-      fontSize: ResponsiveValue<double>(
+      color: Colors.white,
+      height: 1.5,
+      fontSize: ResponsiveFont.size(
         context,
-        defaultValue: 12.0,
-        conditionalValues: [
-          Condition.largerThan(name: TABLET, value: 14.0),
-          Condition.largerThan(name: DESKTOP, value: 16.0),
-        ],
-      ).value,
-      fontWeight: FontWeight.normal,
+        mobile: 14,
+        tablet: 16,
+        desktop: 18,
+        min: 12,
+        max: 20,
+      ),
+      fontWeight: FontWeight.w400,
     );
   }
 
   static TextStyle buttonText(BuildContext context) {
     return TextStyle(
       color: Colors.white,
-      fontSize: ResponsiveValue<double>(
+      fontSize: ResponsiveFont.size(
         context,
-        defaultValue: 16.0,
-        conditionalValues: [Condition.largerThan(name: TABLET, value: 18.0)],
-      ).value,
+        mobile: 16,
+        tablet: 18,
+        desktop: 20,
+        min: 14,
+        max: 22,
+      ),
       fontWeight: FontWeight.w600,
       letterSpacing: 1,
     );
+  }
+}
+
+class ResponsiveFont {
+  static double size(
+    BuildContext context, {
+    required double mobile,
+    double? tablet,
+    double? desktop,
+    double min = 12,
+    double max = 60,
+  }) {
+    final width = MediaQuery.sizeOf(context).width;
+
+    // Smooth scale based on mobile reference (390px)
+    double scale = width / 390;
+
+    double baseSize = mobile;
+
+    if (ResponsiveBreakpoints.of(context).largerThan(TABLET)) {
+      baseSize = tablet ?? mobile * 1.2;
+    }
+
+    if (ResponsiveBreakpoints.of(context).largerThan(DESKTOP)) {
+      baseSize = desktop ?? mobile * 1.4;
+    }
+
+    double responsiveSize = baseSize * scale;
+
+    return responsiveSize.clamp(min, max);
   }
 }
