@@ -95,7 +95,7 @@ class EnglishInvitation extends StatelessWidget {
                     controller: scrollController,
                     start: 1050,
                     end: 1150,
-                    child: Text('Mr. HOK YONN', style: parentsTextStyle),
+                    child: Text('Mr. HOK YONN and', style: parentsTextStyle),
                   ),
                   ScrollFade(
                     controller: scrollController,
@@ -180,14 +180,17 @@ class EnglishInvitation extends StatelessWidget {
                   controller: scrollController,
                   start: 1220,
                   end: 1320,
-                  child: Text(
+                  child: SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.05,
+                    child: Image.asset('assets/wedding_name_2.png'),
+                  ) /* Text(
                     ' & ',
                     style: AppStyles.heading2(context).copyWith(
                       color: Colors.amber[700],
                       fontFamily: 'IMFellEnglishSC',
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ), */,
                 ),
               ),
             ),

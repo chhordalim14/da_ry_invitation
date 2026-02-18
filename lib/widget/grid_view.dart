@@ -6,16 +6,16 @@ class MasonryGridExample extends StatelessWidget {
   const MasonryGridExample({super.key});
 
   final List<String> weddingImagePaths = const [
-    'assets/wedding/wedding_image_1.jpg',
-    'assets/wedding/wedding_image_2.jpg',
-    'assets/wedding/wedding_image_3.jpg',
-    'assets/wedding/wedding_image_4.jpg',
-    'assets/wedding/wedding_image_5.jpg',
-    'assets/wedding/wedding_image_6.jpg',
-    'assets/wedding/wedding_image_7.jpg',
-    'assets/wedding/wedding_image_8.jpg',
-    'assets/wedding/wedding_image_9.jpg',
-    'assets/wedding/wedding_image_10.jpg',
+    'assets/wedding/wedding_image_1.png',
+    'assets/wedding/wedding_image_2.png',
+    'assets/wedding/wedding_image_3.png',
+    'assets/wedding/wedding_image_4.png',
+    'assets/wedding/wedding_image_5.png',
+    'assets/wedding/wedding_image_6.png',
+    'assets/wedding/wedding_image_7.png',
+    'assets/wedding/wedding_image_8.png',
+    'assets/wedding/wedding_image_9.png',
+    'assets/wedding/wedding_image_10.png',
   ];
 
   @override
@@ -77,33 +77,33 @@ class MasonryGridExample extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, String imagePath, double width) {
-    // Accept context
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FullScreenImageView(imagePath: imagePath),
-          ),
-        );
-      },
-      child: Container(
-        width: width,
-        margin: const EdgeInsets.all(6),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.contain,
-
-            // filterQuality: FilterQuality.high,
-            width: width,
-            // webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
+ Widget _buildItem(BuildContext context, String imagePath, double width) {
+  return GestureDetector(
+    onTap: () {
+      final initialIndex = weddingImagePaths.indexOf(imagePath);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => FullScreenImageView(
+            images: weddingImagePaths, // pass all images
+            initialIndex: initialIndex,
           ),
         ),
+      );
+    },
+    child: Container(
+      width: width,
+      margin: const EdgeInsets.all(6),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          imagePath,
+          fit: BoxFit.contain,
+          width: width,
+        ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

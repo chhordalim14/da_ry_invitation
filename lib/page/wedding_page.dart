@@ -152,7 +152,7 @@ class _WeddingPageState extends State<WeddingPage> {
           SizedBox(
             height: containerWidth * 0.4,
             child: Image.asset(
-              'assets/wedding_frame_name.png',
+              'assets/wedding_frame_name_1.png',
               fit: BoxFit.contain,
             ),
           ),
@@ -198,7 +198,20 @@ class _WeddingPageState extends State<WeddingPage> {
                   });
                 },
                 child: Container(
-                  width: MediaQuery.sizeOf(context).height * 0.25,
+                  width: ResponsiveValue<double>(
+                    context,
+                    defaultValue: MediaQuery.sizeOf(context).height * 0.25,
+                    conditionalValues: [
+                      Condition.largerThan(
+                        name: TABLET,
+                        value: MediaQuery.sizeOf(context).height * 0.3,
+                      ),
+                      Condition.largerThan(
+                        name: DESKTOP,
+                        value: MediaQuery.sizeOf(context).width * 0.4,
+                      ),
+                    ],
+                  ).value,
                   height: MediaQuery.sizeOf(context).height * 0.05,
                   decoration: BoxDecoration(
                     color: Colors.amber[700],
@@ -223,16 +236,16 @@ class _WeddingPageState extends State<WeddingPage> {
                     children: [
                       Icon(
                         FontAwesomeIcons.envelopeOpen,
-                        size: 20,
+                        size: 16,
                         color: Colors.white,
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: MediaQuery.sizeOf(context).width * 0.03),
                       Flexible(
                         child: Text(
                           'សូមចុចបើកធៀប',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: AppStyles.bodyText1(context).copyWith(
+                          style: AppStyles.bodyText(context).copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Moulpali',
@@ -296,7 +309,7 @@ class _WeddingPageState extends State<WeddingPage> {
       start: 400,
       end: 500,
       child: Text(
-        'ថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩\nត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច នៅ សាលាកាកបាទ​ក្រហមកម្ពុជា ខេត្តកណ្តាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
+        'ថ្ងៃអាទិត្យ ៥រោច ខែផល្គុន ឆ្នាំម្សាញ់ សប្តស័ក ព.ស.២៥៦៩\nត្រូវនឹងថ្ងៃទី ០៨ ខែមីនា ឆ្នាំ ២០២៦ វេលាម៉ោង ៥:០០ល្ងាច នៅ សាខាកាកបាទក្រហមកម្ពុជា ខេត្តកណ្ដាល ដោយមេត្រីភាព ។\n(សូមអញ្ជើញពិនិត្យប្លង់) សូមអរគុណ !',
         style: AppStyles.bodyText1(
           context,
         ).copyWith(color: Colors.amber[700], fontFamily: 'KantumruyPro'),

@@ -2,12 +2,13 @@ import 'package:da_ry_invitation/page/wedding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() {
+  usePathUrlStrategy(); // remove #
   runApp(const WeddingApp());
 }
 
-// GoRouter configuration
 final _router = GoRouter(
   routes: [
     GoRoute(

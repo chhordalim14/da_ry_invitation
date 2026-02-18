@@ -39,7 +39,7 @@ class WeddingProgramStepper extends StatelessWidget {
   final List<EventStep> day2Events = [
     EventStep(
       time: 'ម៉ោង ០៦:៣០ ព្រឹក',
-      title: 'ពិធីហែជំនួន',
+      title: 'ពិធីហែជំនូន',
       icon: 'assets/icons/icon_18.png',
     ),
     EventStep(
@@ -160,7 +160,7 @@ class WeddingProgramStepper extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'របៀបរារះកម្មវិធី / EVENT AGENDA',
+            'ររបៀបវារៈកម្មវិធី / EVENT AGENDA',
             style: AppStyles.heading2(context).copyWith(
               color: Colors.amber[700],
               // fontSize: 18,

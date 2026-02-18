@@ -71,7 +71,7 @@ class BrideAndGroomSection extends StatelessWidget {
               height: MediaQuery.sizeOf(context).height * 0.12,
               width: MediaQuery.sizeOf(context).height * 0.12,
               child: Image.asset(
-                'assets/wedding_frame_name.png',
+                'assets/wedding_frame_name_1.png',
                 fit: BoxFit.contain,
               ),
             ),

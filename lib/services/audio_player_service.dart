@@ -1,8 +1,10 @@
-import 'package:flutter/foundation.dart'; // for kIsWeb
+import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 
 class AudioPlayerService {
-  static final AudioPlayerService _instance = AudioPlayerService._internal();
+  static final AudioPlayerService _instance =
+      AudioPlayerService._internal();
+
   late final AudioPlayer _player;
   bool _isInitialized = false;
 
@@ -16,24 +18,16 @@ class AudioPlayerService {
     if (_isInitialized) return;
 
     if (kIsWeb) {
-      // Use URI for web assets
-      await _player.setAudioSource(
-        AudioSource.uri(Uri.parse('assets/audio/wedding_music.mp3')),
+      await _player.setUrl(
+        'assets/assets/audio/wedding_music.mp3',
       );
     } else {
-      // Mobile: use asset normally
-      await _player.setAudioSource(
-        AudioSource.asset('assets/audio/wedding_music.mp3'),
-      );
+      await _player.setAsset('assets/audio/wedding_music.mp3');
     }
 
-    await _player.playerStateStream.firstWhere(
-      (state) =>
-          state.processingState == ProcessingState.ready ||
-          state.processingState == ProcessingState.completed,
-    );
-
     await _player.setLoopMode(LoopMode.one);
+    await _player.setVolume(1.0);
+
     _isInitialized = true;
   }
 
@@ -43,6 +37,6 @@ class AudioPlayerService {
   }
 
   Future<void> pause() async => _player.pause();
-  bool get isPlaying => _player.playing;
+
   Stream<bool> get playingStream => _player.playingStream;
 }
