@@ -11,14 +11,29 @@ void main() {
 
 final _router = GoRouter(
   routes: [
-    GoRoute(path: '/', builder: (context, state) => const WeddingPage()),
     GoRoute(
-      path: '/guest/:name',
-      builder: (context, state) {
-        final name = state.pathParameters['name'] ?? '';
-        return WeddingPage(guestName: name);
-      },
+      path: '/',
+      builder: (context, state) => const WeddingPage(),
     ),
+    GoRoute(
+  path: '/guest/:name',
+  builder: (context, state) {
+    final rawName = state.pathParameters['name'] ?? '';
+
+    String guestName;
+    try {
+      guestName = Uri.decodeComponent(rawName);
+    } catch (_) {
+      // If not encoded, use raw value
+      guestName = rawName;
+    }
+
+    guestName = guestName.replaceAll('-', ' ');
+
+    return WeddingPage(guestName: guestName);
+  },
+),
+
   ],
 );
 

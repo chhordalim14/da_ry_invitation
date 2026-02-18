@@ -193,7 +193,7 @@ class WeddingProgramStepper extends StatelessWidget {
             ),
             SizedBox(height: spacing * 3),
             _daySection(
-              "កម្មវិធីថ្ងៃទី២ ថ្ងៃសៅរ៍ ទី ០៨ ខែមីនា ឆ្នាំ ២០២៦",
+              "កម្មវិធីថ្ងៃទី២ ថ្ងៃអាទិត្យ ទី ០៨ ខែមីនា ឆ្នាំ ២០២៦",
               day2Events,
               context,
               iconSize,
